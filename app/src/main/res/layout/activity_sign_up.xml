@@ -7,8 +7,10 @@
     tools:context=".SignUpActivity"
     android:orientation="vertical">
     <TextView
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="80dp"
+        android:text="SignUp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="USERNAME"/>
         <EditText
+            android:id="@+id/inputUSERID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -36,6 +39,7 @@
             android:layout_height="wrap_content"
             android:text="EMAIL"/>
         <EditText
+            android:id="@+id/inputEMAIL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -51,6 +55,7 @@
             android:layout_height="wrap_content"
             android:text="PASSWORD"/>
         <EditText
+            android:id="@+id/inputPASSWORD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -66,7 +71,20 @@
             android:layout_height="wrap_content"
             android:text="CONFIRM PASSWORD"/>
         <EditText
+            android:id="@+id/inputCONFIRM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <Button
+            android:id="@+id/ConfirmBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONFIRM"
+            android:onClick="Confirm"/>
+    </LinearLayout>
+
 </LinearLayout>
