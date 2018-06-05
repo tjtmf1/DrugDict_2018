@@ -49,4 +49,10 @@
         android:text="SignUp"
         android:onClick="onSignUp"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CloudVision"
+        android:onClick="onCloudVision"/>
+
 </LinearLayout>
