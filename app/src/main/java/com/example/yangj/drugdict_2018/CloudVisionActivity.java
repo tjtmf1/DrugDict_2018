@@ -1,6 +1,7 @@
 package com.example.yangj.drugdict_2018;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +61,9 @@ public class CloudVisionActivity extends AppCompatActivity {
     private TextView mImageDetails;
     private ImageView mMainImage;
 
+    private static String text = null;
+    Button btn1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +83,15 @@ public class CloudVisionActivity extends AppCompatActivity {
 
         mImageDetails = findViewById(R.id.image_details);
         mMainImage = findViewById(R.id.main_image);
+        btn1 = (Button) findViewById(R.id.button2);
+//        btn1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), DrugDatabaseActivity.class);
+//                intent.putExtra("Drugs", text);
+//            }
+//        });
+
     }
 
     public void startGalleryChooser() {
@@ -227,6 +242,13 @@ public class CloudVisionActivity extends AppCompatActivity {
         return annotateRequest;
     }
 
+    public void btnClick(View view) {
+        Intent intent = new Intent(this, DrugDatabaseActivity.class);
+        intent.putExtra("Drugs", text);
+
+        startActivity(intent);
+    }
+
     private static class LableDetectionTask extends AsyncTask<Object, Void, String> {
         private final WeakReference<CloudVisionActivity> mActivityWeakReference;
         private Vision.Images.Annotate mRequest;
@@ -241,6 +263,8 @@ public class CloudVisionActivity extends AppCompatActivity {
             try {
                 Log.d(TAG, "created Cloud Vision request object, sending request");
                 BatchAnnotateImagesResponse response = mRequest.execute();
+                String a = convertResponseToString(response);
+
                 return convertResponseToString(response);
 
             } catch (GoogleJsonResponseException e) {
@@ -315,42 +339,43 @@ public class CloudVisionActivity extends AppCompatActivity {
         String message = "I found these things:\n\n";
         List<EntityAnnotation> labels = response.getResponses().get(0).getTextAnnotations();
         if (labels != null) {
-            message  = labels.get(0).getDescription();
+            message = labels.get(0).getDescription();
         } else {
-            message  = "nothing";
+            message = "nothing";
         }
         message = pickdrugname(message);
         // 이제 이 message 를 Arraylist로 만들면됩니다 (공백으로 구분해서) 디비 처리할때.
+
+        text = message;
         return message;
     }
 
-    public static String pickdrugname(String original){
+    public static String pickdrugname(String original) {
         String drug = "";
 
         ArrayList<String> drugname = new ArrayList<>();
         int num = 0;
         //숫자 8,9개의 약번호 뒤의 약품이름들만 읽어오기
-        for(int i=0;i<original.length();i++){
-            if(num>=8&&original.charAt(i)>='가'&&original.charAt(i)<='힣'){
-                drug+=original.charAt(i);
+        for (int i = 0; i < original.length(); i++) {
+            if (num >= 8 && original.charAt(i) >= '가' && original.charAt(i) <= '힣') {
+                drug += original.charAt(i);
                 continue;
-            }
-            else{
+            } else {
                 drugname.add(drug);
-                drug ="";
+                drug = "";
             }
-            if(original.charAt(i)!=' '){
-                if(original.charAt(i)>='0'&&original.charAt(i)<='9'){
+            if (original.charAt(i) != ' ') {
+                if (original.charAt(i) >= '0' && original.charAt(i) <= '9') {
                     num++;
                     continue;
-                }else{
+                } else {
                     num = 0;
                 }
             }
         }
-        String a="";
-        for(int i=0;i<drugname.size();i++){
-            a+=drugname.get(i)+" ";
+        String a = "";
+        for (int i = 0; i < drugname.size(); i++) {
+            a += drugname.get(i) + " ";
         }
         Log.d("aaa", a);
 

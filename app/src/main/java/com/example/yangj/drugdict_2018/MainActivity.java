@@ -2,6 +2,8 @@ package com.example.yangj.drugdict_2018;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+
+import android.app.Application;
 import android.os.Bundle;
 import android.view.View;
 
@@ -50,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCloudVision(View view) {
         Intent intent = new Intent(this, CloudVisionActivity.class);
+        startActivity(intent);
+    }
+
+    public void onDrugDatabase(View view) {
+        Intent intent = new Intent(this, DrugDatabaseActivity.class);
         startActivity(intent);
     }
 }
