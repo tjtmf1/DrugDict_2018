@@ -76,7 +76,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_local_pharmacy_black_24dp"
             fab:fab_label="약으로 검색"
-            fab:fab_size="normal" />
+            fab:fab_size="normal"
+            android:onClick="onDrugFAB"/>
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/prescriptionFAB"
@@ -84,7 +85,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_assignment_black_24dp"
             fab:fab_label="처방전 읽기"
-            fab:fab_size="normal" />
+            fab:fab_size="normal"
+            android:onClick="onPrescriptionFAB"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

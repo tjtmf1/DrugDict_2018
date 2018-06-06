@@ -1,11 +1,11 @@
 package com.example.yangj.drugdict_2018;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -13,7 +13,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -53,8 +52,8 @@ public class CloudVisionActivity extends AppCompatActivity {
     private static final int MAX_DIMENSION = 1200;
 
     private static final String TAG = CloudVisionActivity.class.getSimpleName();
-    private static final int GALLERY_PERMISSIONS_REQUEST = 0;
-    private static final int GALLERY_IMAGE_REQUEST = 1;
+    public static final int GALLERY_PERMISSIONS_REQUEST = 0;
+    public static final int GALLERY_IMAGE_REQUEST = 1;
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
 
@@ -84,14 +83,6 @@ public class CloudVisionActivity extends AppCompatActivity {
         mImageDetails = findViewById(R.id.image_details);
         mMainImage = findViewById(R.id.main_image);
         btn1 = (Button) findViewById(R.id.button2);
-//        btn1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), DrugDatabaseActivity.class);
-//                intent.putExtra("Drugs", text);
-//            }
-//        });
-
     }
 
     public void startGalleryChooser() {
