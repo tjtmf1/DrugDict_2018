@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class SearchListFragment extends Fragment {
 
-    DrugListAdapter adapter;
+    DrugSearchListAdapter adapter;
     ListView listView;
     public SearchListFragment() {
         // Required empty public constructor
@@ -33,7 +33,7 @@ public class SearchListFragment extends Fragment {
     }
 
     public void setListView(ArrayList<com.example.force.infodb.ProductInfo> list){
-        adapter = new DrugListAdapter(getActivity(), R.layout.drug_list_row, list);
+        adapter = new DrugSearchListAdapter(getActivity(), R.layout.drug_list_row, list);
         listView.setAdapter(adapter);
     }
 }

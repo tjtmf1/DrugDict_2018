@@ -16,7 +16,7 @@ public class SearchDrugActivity extends AppCompatActivity {
     EditText searchEdit;
     ArrayList<com.example.force.infodb.ProductInfo> productInfos;
     ArrayList<ProductInfo> searchProducts;
-    DrugListAdapter adapter;
+    DrugSearchListAdapter adapter;
     SearchListFragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
