@@ -8,20 +8,35 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/ivPrescription"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <ScrollView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorUnderLine"/>
+
+    <ListView
+        android:id="@+id/lvAddDrugs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </ListView>
 
-        </android.support.v7.widget.RecyclerView>
-    </ScrollView>
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1">-->
+
+        <!--<ListView-->
+            <!--android:id="@+id/lvAddDrugs"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+        <!--</ListView>-->
+    <!--</ScrollView>-->
 
 </LinearLayout>

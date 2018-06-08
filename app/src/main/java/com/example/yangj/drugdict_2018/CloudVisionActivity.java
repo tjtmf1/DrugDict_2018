@@ -59,7 +59,7 @@ public class CloudVisionActivity extends AppCompatActivity {
 
     private TextView mImageDetails;
     private ImageView mMainImage;
-
+    private static  ArrayList<String> drugs = new ArrayList<>();
     private static String text = null;
     Button btn1;
 
@@ -338,9 +338,26 @@ public class CloudVisionActivity extends AppCompatActivity {
         // 이제 이 message 를 Arraylist로 만들면됩니다 (공백으로 구분해서) 디비 처리할때.
 
         text = message;
+        drugs = eraseSpace(message);
         return message;
     }
-
+    public static ArrayList<String> eraseSpace(String str){
+        ArrayList<String> arrayList = new ArrayList<>();
+        String name="";
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)==' '){
+                if(!name.equals("")){
+                    arrayList.add(name);
+                    name = "";
+                }
+                continue;
+            }
+            else{
+                name+=str.charAt(i);
+            }
+        }
+        return arrayList;
+    }
     public static String pickdrugname(String original) {
         String drug = "";
 
