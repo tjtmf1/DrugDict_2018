@@ -28,7 +28,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
     private ListView mDrugList;
     private ImageView mMainImage;
-    private DrugSearchListAdapter adapter;
+    private AddDrugListAdapter adapter;
     private ArrayList<Drug> drugs;
     private ArrayList<Drug> useDrugs;
 
@@ -45,7 +45,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         mDrugList = findViewById(R.id.lvAddDrugs);
         mMainImage = findViewById(R.id.ivPrescription);
         useDrugs = new ArrayList<>();
-        adapter = new DrugSearchListAdapter(this, R.layout.add_drug_layout, drugs);
+        adapter = new AddDrugListAdapter(this, R.layout.add_drug_layout, drugs);
         mDrugList.setAdapter(adapter);
     }
 
