@@ -3,7 +3,6 @@ package com.example.yangj.drugdict_2018;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
@@ -41,7 +40,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         setupToolBar();
 
         Intent intent = getIntent();
-        drugs = (ArrayList) intent.getSerializableExtra("drugs");
+        drugs = (ArrayList) intent.getSerializableExtra("detectDrugs");
 
         mDrugList = findViewById(R.id.lvAddDrugs);
         mMainImage = findViewById(R.id.ivPrescription);
@@ -78,9 +77,9 @@ public class AddPrescriptionActivity extends AppCompatActivity {
             }
         }
 
-        for(int i=0; i<useDrugs.size(); i++){
-            Log.d("AppPrescriptionActivity", useDrugs.get(i).getmDrugName() + "");
-        }
+//        for(int i=0; i<useDrugs.size(); i++){
+//            Log.d("AppPrescriptionActivity", useDrugs.get(i).getmDrugName() + "");
+//        }
 
         Intent intent = new Intent();
         intent.putExtra("useDrugs", useDrugs);

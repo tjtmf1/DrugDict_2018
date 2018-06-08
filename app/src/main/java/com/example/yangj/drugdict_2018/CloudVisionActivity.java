@@ -1,6 +1,7 @@
 package com.example.yangj.drugdict_2018;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,9 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -59,26 +58,43 @@ public class CloudVisionActivity extends AppCompatActivity {
 
     private TextView mImageDetails;
     private ImageView mMainImage;
-    private static  ArrayList<String> drugs = new ArrayList<>();
+    private static  ArrayList<Drug> drugs;
     private static String text = null;
     Button btn1;
+
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cloud_vision);
+
+        activity = this;
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CloudVisionActivity.this);
-            builder
-                    .setMessage(R.string.dialog_select_prompt)
-                    .setPositiveButton(R.string.dialog_select_gallery, (dialog, which) -> startGalleryChooser())
-                    .setNegativeButton(R.string.dialog_select_camera, (dialog, which) -> startCamera());
-            builder.create().show();
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(view -> {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(CloudVisionActivity.this);
+//            builder
+//                    .setMessage(R.string.dialog_select_prompt)
+//                    .setPositiveButton(R.string.dialog_select_gallery, (dialog, which) -> startGalleryChooser())
+//                    .setNegativeButton(R.string.dialog_select_camera, (dialog, which) -> startCamera());
+//            builder.create().show();
+//        });
+
+        drugs = new ArrayList<>();
+
+        Intent intent = getIntent();
+        switch (intent.getIntExtra("startMode", 0)){
+            case MyTakingActivity.START_CAMERA:
+                startCamera();
+                break;
+            case MyTakingActivity.START_GALLERY_CHOOSER:
+                startGalleryChooser();
+                break;
+        }
 
         mImageDetails = findViewById(R.id.image_details);
         mMainImage = findViewById(R.id.main_image);
@@ -338,7 +354,7 @@ public class CloudVisionActivity extends AppCompatActivity {
         // 이제 이 message 를 Arraylist로 만들면됩니다 (공백으로 구분해서) 디비 처리할때.
 
         text = message;
-        drugs = eraseSpace(message);
+//        drugs = eraseSpace(message);
         return message;
     }
     public static ArrayList<String> eraseSpace(String str){
@@ -361,7 +377,7 @@ public class CloudVisionActivity extends AppCompatActivity {
     public static String pickdrugname(String original) {
         String drug = "";
 
-        ArrayList<String> drugname = new ArrayList<>();
+//        ArrayList<String> drugname = new ArrayList<>();
         int num = 0;
         //숫자 8,9개의 약번호 뒤의 약품이름들만 읽어오기
         for (int i = 0; i < original.length(); i++) {
@@ -369,8 +385,13 @@ public class CloudVisionActivity extends AppCompatActivity {
                 drug += original.charAt(i);
                 continue;
             } else {
-                drugname.add(drug);
-                drug = "";
+                if(!drug.equals("")){
+//                    Log.d("CloudVision", drug + " ");
+                    drugs.add(new Drug(drug));
+                    drug = "";
+                }
+//                drugname.add(drug);
+//                drug = "";
             }
             if (original.charAt(i) != ' ') {
                 if (original.charAt(i) >= '0' && original.charAt(i) <= '9') {
@@ -382,10 +403,19 @@ public class CloudVisionActivity extends AppCompatActivity {
             }
         }
         String a = "";
-        for (int i = 0; i < drugname.size(); i++) {
-            a += drugname.get(i) + " ";
-        }
-        Log.d("aaa", a);
+//        for (int i = 0; i < drugname.size(); i++) {
+//            a += drugname.get(i) + " ";
+//        }
+//        Log.d("aaa", a);
+
+//        for(int i=0; i<drugs.size(); i++){
+//            Log.d("CloudVision", drugs.get(i).getmDrugName() + " ");
+//        }
+
+        Intent intent = new Intent();
+        intent.putExtra("detectDrugs", drugs);
+        activity.setResult(RESULT_OK, intent);
+        activity.finish();
 
         return a;
     }

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class MyTakingActivity extends AppCompatActivity {
 
-    private static final int START_GALLERY_CHOOSER = 1000;
-    private static final int START_CAMERA = 1001;
+    static final int START_GALLERY_CHOOSER = 1000;
+    static final int START_CAMERA = 1001;
     private static final int CLOUD_VISION = 2000;
     private static final int ADD_PRESCRIPTION = 2001;
 
@@ -41,9 +41,9 @@ public class MyTakingActivity extends AppCompatActivity {
         mDrugList.setAdapter(adapter);
 
         // 처방전에서 불러옴
-        mDrugs.add(new Drug("asdf"));
-        mDrugs.add(new Drug("qwer"));
-        mDrugs.add(new Drug("zxcv"));
+//        mDrugs.add(new Drug("asdf"));
+//        mDrugs.add(new Drug("qwer"));
+//        mDrugs.add(new Drug("zxcv"));
     }
 
     public void onDrugFAB(View view) {
@@ -73,9 +73,13 @@ public class MyTakingActivity extends AppCompatActivity {
 //                        });
 //        builder.create().show();
 
-        Intent intent = new Intent(getApplicationContext(), AddPrescriptionActivity.class);
-        intent.putExtra("drugs", mDrugs);
-        startActivityForResult(intent, ADD_PRESCRIPTION);
+//        Intent intent = new Intent(getApplicationContext(), AddPrescriptionActivity.class);
+//        intent.putExtra("drugs", mDrugs);
+//        startActivityForResult(intent, ADD_PRESCRIPTION);
+
+        Intent intent = new Intent(getApplicationContext(), CloudVisionActivity.class);
+        intent.putExtra("startMode", START_GALLERY_CHOOSER);
+        startActivityForResult(intent, CLOUD_VISION);
     }
 
     @Override
@@ -85,13 +89,21 @@ public class MyTakingActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             switch (requestCode) {
                 case CLOUD_VISION:
+                    Log.d("MyTakingActivity", "finish cloud vision");
+
+                    mDrugs = (ArrayList) data.getSerializableExtra("detectDrugs");
+
+                    Intent intent = new Intent(getApplicationContext(), AddPrescriptionActivity.class);
+                    intent.putExtra("detectDrugs", mDrugs);
+                    startActivityForResult(intent, ADD_PRESCRIPTION);
+
                     break;
                 case ADD_PRESCRIPTION:
                     mDrugs = (ArrayList) data.getSerializableExtra("useDrugs");
 
-                    for(int i=0; i<mDrugs.size(); i++){
-                        Log.d("MyTakingActivity", mDrugs.get(i).getmDrugName() + "");
-                    }
+//                    for(int i=0; i<mDrugs.size(); i++){
+//                        Log.d("MyTakingActivity", mDrugs.get(i).getmDrugName() + "");
+//                    }
 
                     // firebase에 올려주는 작업
 
