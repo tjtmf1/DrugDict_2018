@@ -19,7 +19,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     private static final String TAG = "AppPrescription";
     private ListView mDrugList;
     private ImageView mMainImage;
-    private DrugListAdapter adapter;
+    private AddDrugListAdapter adapter;
     private ArrayList<Drug> drugs;
     private ArrayList<Drug> useDrugs;
 
@@ -42,7 +42,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         Log.d(TAG, "uri : " + uri);
         mMainImage.setImageURI(Uri.parse(uri));
         useDrugs = new ArrayList<>();
-        adapter = new DrugListAdapter(this, R.layout.add_drug_layout, drugs);
+        adapter = new AddDrugListAdapter(this, R.layout.add_drug_layout, drugs);
         mDrugList.setAdapter(adapter);
     }
 

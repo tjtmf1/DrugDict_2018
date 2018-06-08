@@ -41,7 +41,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".DrugDatabaseActivity"></activity>
+        <activity android:name=".DrugDatabaseActivity" />
+        <activity android:name=".PrecautionActivity"></activity>
     </application>
 
 </manifest>

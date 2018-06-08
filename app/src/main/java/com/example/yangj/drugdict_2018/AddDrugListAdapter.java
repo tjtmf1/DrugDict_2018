@@ -14,14 +14,14 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-public class DrugListAdapter extends ArrayAdapter {
+public class AddDrugListAdapter extends ArrayAdapter {
     Context context;
     ArrayList<Drug> mDrugs;
     ArrayList<EditText> mEditTexts;
     ArrayList<CheckBox> mCheckBoxs;
 
 
-    public DrugListAdapter(@NonNull Context context, int resource, @NonNull ArrayList objects) {
+    public AddDrugListAdapter(@NonNull Context context, int resource, @NonNull ArrayList objects) {
         super(context, resource, objects);
 
         this.context = context;
