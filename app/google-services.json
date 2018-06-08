@@ -63,6 +63,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "541637828986-hhhu21qg4eto6u6d4bcdvb3lfvsagit9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yangj.drugdict_2018",
+            "certificate_hash": "1e44204224c01879902b7028dcaa856edb43b710"
+          }
+        },
+        {
           "client_id": "541637828986-e3mvmf141547f7m2vhc12vsh4bs24idj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
