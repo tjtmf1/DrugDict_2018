@@ -12,14 +12,12 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.style.RotatingCircle;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -56,11 +54,10 @@ public class CloudVisionActivity extends AppCompatActivity {
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
 
-    private TextView mImageDetails;
-    private ImageView mMainImage;
     private static  ArrayList<Drug> drugs;
     private static String text = null;
-    Button btn1;
+    private ProgressBar progressBar;
+    private static String uri;
 
     public static Activity activity;
 
@@ -70,19 +67,6 @@ public class CloudVisionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cloud_vision);
 
         activity = this;
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(view -> {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(CloudVisionActivity.this);
-//            builder
-//                    .setMessage(R.string.dialog_select_prompt)
-//                    .setPositiveButton(R.string.dialog_select_gallery, (dialog, which) -> startGalleryChooser())
-//                    .setNegativeButton(R.string.dialog_select_camera, (dialog, which) -> startCamera());
-//            builder.create().show();
-//        });
 
         drugs = new ArrayList<>();
 
@@ -96,9 +80,9 @@ public class CloudVisionActivity extends AppCompatActivity {
                 break;
         }
 
-        mImageDetails = findViewById(R.id.image_details);
-        mMainImage = findViewById(R.id.main_image);
-        btn1 = (Button) findViewById(R.id.button2);
+        progressBar = (ProgressBar) findViewById(R.id.spinKit);
+        RotatingCircle rotatingCircle = new RotatingCircle();
+        progressBar.setIndeterminateDrawable(rotatingCircle);
     }
 
     public void startGalleryChooser() {
@@ -135,6 +119,8 @@ public class CloudVisionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GALLERY_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            uri = data.getData().toString();
+            Log.d("CloudVision", "uri : " + uri);
             uploadImage(data.getData());
         } else if (requestCode == CAMERA_IMAGE_REQUEST && resultCode == RESULT_OK) {
             Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
@@ -170,7 +156,6 @@ public class CloudVisionActivity extends AppCompatActivity {
                                 MAX_DIMENSION);
 
                 callCloudVision(bitmap);
-                mMainImage.setImageBitmap(bitmap);
 
             } catch (IOException e) {
                 Log.d(TAG, "Image picking failed because " + e.getMessage());
@@ -249,13 +234,6 @@ public class CloudVisionActivity extends AppCompatActivity {
         return annotateRequest;
     }
 
-    public void btnClick(View view) {
-        Intent intent = new Intent(this, DrugDatabaseActivity.class);
-        intent.putExtra("Drugs", text);
-
-        startActivity(intent);
-    }
-
     private static class LableDetectionTask extends AsyncTask<Object, Void, String> {
         private final WeakReference<CloudVisionActivity> mActivityWeakReference;
         private Vision.Images.Annotate mRequest;
@@ -294,7 +272,6 @@ public class CloudVisionActivity extends AppCompatActivity {
 
     private void callCloudVision(final Bitmap bitmap) {
         // Switch text to loading
-        mImageDetails.setText(R.string.loading_message);
 
         // Do the real work in an async task, because we need to use the network anyway
         try {
@@ -386,12 +363,9 @@ public class CloudVisionActivity extends AppCompatActivity {
                 continue;
             } else {
                 if(!drug.equals("")){
-//                    Log.d("CloudVision", drug + " ");
                     drugs.add(new Drug(drug));
                     drug = "";
                 }
-//                drugname.add(drug);
-//                drug = "";
             }
             if (original.charAt(i) != ' ') {
                 if (original.charAt(i) >= '0' && original.charAt(i) <= '9') {
@@ -414,6 +388,7 @@ public class CloudVisionActivity extends AppCompatActivity {
 
         Intent intent = new Intent();
         intent.putExtra("detectDrugs", drugs);
+        intent.putExtra("imageUri", uri);
         activity.setResult(RESULT_OK, intent);
         activity.finish();
 
