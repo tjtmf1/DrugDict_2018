@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "541637828986",
+    "firebase_url": "https://medinfo-666e1.firebaseio.com",
+    "project_id": "medinfo-666e1",
+    "storage_bucket": "medinfo-666e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541637828986:android:5c851109d6b18143",
+        "android_client_info": {
+          "package_name": "com.example.force.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541637828986-bi2fa1iq3rbm0mhehldf81o4hta11ngn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.force.test",
+            "certificate_hash": "553efce6e739682a52a68b35ca74cf9809446c29"
+          }
+        },
+        {
+          "client_id": "541637828986-au3eujj7malo2rgospgp3r05iq17jo3e.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "541637828986-au3eujj7malo2rgospgp3r05iq17jo3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPkFvQl-XQX9deE5WqDbHZg4vltTlXhZA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541637828986-au3eujj7malo2rgospgp3r05iq17jo3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541637828986:android:70a15244f43e6462",
+        "android_client_info": {
+          "package_name": "com.example.yangj.drugdict_2018"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541637828986-hhhu21qg4eto6u6d4bcdvb3lfvsagit9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yangj.drugdict_2018",
+            "certificate_hash": "1e44204224c01879902b7028dcaa856edb43b710"
+          }
+        },
+        {
+          "client_id": "541637828986-e3mvmf141547f7m2vhc12vsh4bs24idj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yangj.drugdict_2018",
+            "certificate_hash": "553efce6e739682a52a68b35ca74cf9809446c29"
+          }
+        },
+        {
+          "client_id": "541637828986-au3eujj7malo2rgospgp3r05iq17jo3e.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "541637828986-au3eujj7malo2rgospgp3r05iq17jo3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPkFvQl-XQX9deE5WqDbHZg4vltTlXhZA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541637828986-au3eujj7malo2rgospgp3r05iq17jo3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
