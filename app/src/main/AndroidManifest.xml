@@ -30,7 +30,7 @@
         <activity
             android:name=".CloudVisionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -42,7 +42,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".DrugDatabaseActivity"></activity>
+        <activity android:name=".DrugDatabaseActivity" />
+        <activity android:name=".PrecautionActivity"></activity>
     </application>
 
 </manifest>
