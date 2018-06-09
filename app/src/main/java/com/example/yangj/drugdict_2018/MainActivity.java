@@ -1,10 +1,8 @@
 package com.example.yangj.drugdict_2018;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-
-import android.app.Application;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDrugDatabase(View view) {
         Intent intent = new Intent(this, DrugDatabaseActivity.class);
+        startActivity(intent);
+    }
+
+    public void onDrugDetail(View view) {
+        Intent intent = new Intent(this, DrugDetailActivity.class);
         startActivity(intent);
     }
 }

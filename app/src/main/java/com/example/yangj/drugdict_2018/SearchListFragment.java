@@ -1,11 +1,12 @@
 package com.example.yangj.drugdict_2018;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -17,9 +18,14 @@ import java.util.ArrayList;
 public class SearchListFragment extends Fragment {
 
     DrugSearchListAdapter adapter;
-    ListView listView;
+    ArrayList<com.example.force.infodb.ProductInfo> list;
     public SearchListFragment() {
         // Required empty public constructor
+    }
+    static SearchListFragment getInstance(ArrayList<com.example.force.infodb.ProductInfo> list){
+        SearchListFragment fragment = new SearchListFragment();
+        fragment.list = list;
+        return fragment;
     }
 
 
@@ -28,12 +34,26 @@ public class SearchListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_list, container, false);
-        listView = (ListView)view.findViewById(R.id.searchList);
         return view;
     }
 
-    public void setListView(ArrayList<com.example.force.infodb.ProductInfo> list){
-        adapter = new DrugSearchListAdapter(getActivity(), R.layout.drug_list_row, list);
+    public void setListView(){
+        adapter = new DrugSearchListAdapter(getContext(), R.layout.drug_list_row, list);
+        ListView listView = (ListView)getView().findViewById(R.id.searchList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = list.get(position).getmName();
+                //Intent intent = (getActivity(), DrugDetailActivity.class);
+            }
+        });
     }
+
+    public void setList(ArrayList<com.example.force.infodb.ProductInfo> list){
+        this.list = list;
+        setListView();
+    }
+
+
 }

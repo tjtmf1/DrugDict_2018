@@ -19,15 +19,55 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="색상"
+                android:text="@string/searchColor"
                 android:gravity="center"/>
             <com.wefika.horizontalpicker.HorizontalPicker
-                android:id="@+id/horizontalPicker"
+                android:id="@+id/colorPicker"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
-                app:values="@array/color"
-                />
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/searchShape"
+                android:gravity="center"/>
+            <com.wefika.horizontalpicker.HorizontalPicker
+                android:id="@+id/shapePicker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/searchDivisionLine"
+                android:gravity="center"/>
+            <com.wefika.horizontalpicker.HorizontalPicker
+                android:id="@+id/divisionPicker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/shapeSearchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검색"/>
         </LinearLayout>
     </LinearLayout>
 

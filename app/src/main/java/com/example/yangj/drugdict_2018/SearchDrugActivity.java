@@ -1,13 +1,11 @@
 package com.example.yangj.drugdict_2018;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 
@@ -15,13 +13,14 @@ import com.example.force.infodb.ProductInfo;
 
 import java.util.ArrayList;
 
-public class SearchDrugActivity extends AppCompatActivity {
+public class SearchDrugActivity extends AppCompatActivity implements SearchByShapeFragment.callListListener {
     ListView searchByName;
     EditText searchEdit;
     ArrayList<com.example.force.infodb.ProductInfo> productInfos;
     ArrayList<ProductInfo> searchProducts;
-    DrugSearchListAdapter adapter;
     SearchListFragment fragment;
+    TabHost tabHost;
+    DrugSearchListAdapter bucket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,7 @@ public class SearchDrugActivity extends AppCompatActivity {
 
     public void init() {
         //////////////////////////탭바 설정 시작
-        TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
+        tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
 
         TabHost.TabSpec tab1 = tabHost.newTabSpec("tab1");
@@ -43,6 +42,11 @@ public class SearchDrugActivity extends AppCompatActivity {
         tab2.setContent(R.id.content2);
         tab2.setIndicator("모양으로 찾기");
         tabHost.addTab(tab2);
+
+        TabHost.TabSpec tab3 = tabHost.newTabSpec("tab3");
+        tab3.setContent(R.id.content3);
+        tab3.setIndicator("약바구니");
+        tabHost.addTab(tab3);
 
         searchByName = (ListView) findViewById(R.id.searchList);
         searchEdit = (EditText) findViewById(R.id.searchEdit);
@@ -60,13 +64,17 @@ public class SearchDrugActivity extends AppCompatActivity {
         productInfos.add(new ProductInfo("name41", "img", "shape", "1", "1", "1", "1"));
 
         fragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.searchByName);
-        fragment.setListView(productInfos);
+        fragment.setList(productInfos);
+
+        fragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.drugBucket);
+        bucket = new DrugSearchListAdapter(getApplicationContext(), R.layout.drug_list_row, new ArrayList<ProductInfo>());
+        ((ListView)fragment.getView().findViewById(R.id.searchList)).setAdapter(bucket);
 
         FragmentManager fragmentManager = getFragmentManager();
         // 새로 생성 해주는 부분
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SearchByShapeFragment fragment1 = new SearchByShapeFragment();
-        fragmentTransaction.add(R.id.searchFrame, fragment1, "images");
+        fragmentTransaction.add(R.id.searchFrame, fragment1, "searchShape");
         fragmentTransaction.commit();
     }
 
@@ -79,7 +87,31 @@ public class SearchDrugActivity extends AppCompatActivity {
                 searchProducts.add(p);
             }
         }
-        fragment.setListView(searchProducts);
+        fragment.setList(searchProducts);
+    }
+
+    public void SearchByShape(ArrayList<ProductInfo> list){
+        fragment.setList(list);
+        tabHost.setCurrentTab(0);
+        /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        SearchListFragment fragment = SearchListFragment.getInstance(list);
+        fragmentTransaction.replace(R.id.searchFrame, fragment, "shapeList");
+        fragmentTransaction.commit();
+
+        //fragment.setList(list, getApplicationContext());*/
+    }
+
+    @Override
+    public void changeListView(ArrayList<ProductInfo> list) {
+        SearchByShape(list);
+    }
+
+    public void addBucket(ProductInfo p){
+        bucket.add(p);
+        bucket.notifyDataSetChanged();
+    }
+
+    public void SearchInteraction(View view) {
     }
 }
 

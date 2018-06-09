@@ -61,4 +61,10 @@
         android:text="DrugDatabase"
         android:onClick="onDrugDatabase"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DrugDetail"
+        android:onClick="onDrugDetail"/>
+
 </LinearLayout>

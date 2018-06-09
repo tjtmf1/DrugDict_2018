@@ -43,7 +43,8 @@
         </provider>
 
         <activity android:name=".DrugDatabaseActivity" />
-        <activity android:name=".PrecautionActivity"></activity>
+        <activity android:name=".PrecautionActivity" />
+        <activity android:name=".DrugDetailActivity"></activity>
     </application>
 
 </manifest>

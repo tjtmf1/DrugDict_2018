@@ -15,12 +15,15 @@
     <string name="dialog_select_gallery">Gallery</string>
 
     <string name="image_picker_error">Something is wrong with that image. Pick a different one please.</string>
-    <string-array name="color">
-        <item>빨강</item>
-        <item>흰색</item>
-        <item>검정</item>
-    </string-array>
 
+    <string name="searchColor">색상</string>
+    <string name="searchShape">모양</string>
+    <string name="searchDivisionLine">구분선</string>
+
+    <string name="detailName">약명 : </string>
+    <string name="detailCompany">제조회사 : </string>
+    <string name="detailShape">모양 : </string>
+    <string name="detailColor">색상 : </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
