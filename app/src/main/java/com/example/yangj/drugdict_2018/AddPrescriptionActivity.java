@@ -1,8 +1,10 @@
 package com.example.yangj.drugdict_2018;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
@@ -14,23 +16,14 @@ import java.util.ArrayList;
 
 public class AddPrescriptionActivity extends AppCompatActivity {
 
-    private static final String CLOUD_VISION_API_KEY = "AIzaSyA5ntBn3BaEl7YOPyGiHvoGzL23bZIzads";
-    public static final String FILE_NAME = "temp.jpg";
-    private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
-    private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
-    private static final int MAX_LABEL_RESULTS = 10;
-    private static final int MAX_DIMENSION = 1200;
-
-    private static final int START_GALLERY_CHOOSER = 1000;
-    private static final int START_CAMERA = 1001;
-
-    private static final String TAG = CloudVisionActivity.class.getSimpleName();
-
+    private static final String TAG = "AppPrescription";
     private ListView mDrugList;
     private ImageView mMainImage;
     private AddDrugListAdapter adapter;
     private ArrayList<Drug> drugs;
     private ArrayList<Drug> useDrugs;
+
+    private String uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +34,13 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         drugs = (ArrayList) intent.getSerializableExtra("detectDrugs");
+        uri = intent.getStringExtra("imageUri");
 
         mDrugList = findViewById(R.id.lvAddDrugs);
         mMainImage = findViewById(R.id.ivPrescription);
+
+        Log.d(TAG, "uri : " + uri);
+        mMainImage.setImageURI(Uri.parse(uri));
         useDrugs = new ArrayList<>();
         adapter = new AddDrugListAdapter(this, R.layout.add_drug_layout, drugs);
         mDrugList.setAdapter(adapter);
@@ -76,10 +73,6 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 useDrugs.add(new Drug(editTexts.get(i).getText().toString()));
             }
         }
-
-//        for(int i=0; i<useDrugs.size(); i++){
-//            Log.d("AppPrescriptionActivity", useDrugs.get(i).getmDrugName() + "");
-//        }
 
         Intent intent = new Intent();
         intent.putExtra("useDrugs", useDrugs);

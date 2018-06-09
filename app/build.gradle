@@ -42,6 +42,8 @@ dependencies {
     implementation 'com.google.http-client:google-http-client-gson:1.23.0' exclude module: 'httpclient'
     implementation 'com.google.apis:google-api-services-vision:v1-rev369-1.23.0'
     implementation 'com.github.clans:fab:1.6.2'
+
+    implementation 'com.github.ybq:Android-SpinKit:1.1.0'
     implementation 'com.wefika:horizontal-picker:1.1.1'
 }
 
