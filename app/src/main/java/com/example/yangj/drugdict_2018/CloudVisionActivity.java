@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.ybq.android.spinkit.style.RotatingCircle;
+import com.github.ybq.android.spinkit.style.Wave;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -81,8 +82,8 @@ public class CloudVisionActivity extends AppCompatActivity {
         }
 
         progressBar = (ProgressBar) findViewById(R.id.spinKit);
-        RotatingCircle rotatingCircle = new RotatingCircle();
-        progressBar.setIndeterminateDrawable(rotatingCircle);
+        Wave wave = new Wave();
+        progressBar.setIndeterminateDrawable(wave);
     }
 
     public void startGalleryChooser() {
