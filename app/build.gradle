@@ -45,6 +45,9 @@ dependencies {
 
     implementation 'com.github.ybq:Android-SpinKit:1.1.0'
     implementation 'com.wefika:horizontal-picker:1.1.1'
+
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
