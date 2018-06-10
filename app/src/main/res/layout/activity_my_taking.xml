@@ -40,13 +40,13 @@
         fab:menu_animationDelayPerItem="50"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="#DA4336"
-        fab:menu_colorPressed="#E75043"
+        fab:menu_colorNormal="@color/colorAccent"
+        fab:menu_colorPressed="@color/colorAccent"
         fab:menu_colorRipple="#99FFFFFF"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
-        fab:menu_labels_colorNormal="#333333"
-        fab:menu_labels_colorPressed="#444444"
+        fab:menu_labels_colorNormal="@color/colorPrimaryDeepDark"
+        fab:menu_labels_colorPressed="@color/colorPrimaryDeepDark"
         fab:menu_labels_colorRipple="#66FFFFFF"
         fab:menu_labels_cornerRadius="3dp"
         fab:menu_labels_ellipsize="none"
@@ -78,6 +78,7 @@
             android:src="@drawable/ic_local_pharmacy_black_24dp"
             fab:fab_label="약으로 검색"
             fab:fab_size="normal"
+            fab:fab_colorNormal="@color/colorAccent"
             android:onClick="onDrugFAB"/>
 
         <com.github.clans.fab.FloatingActionButton
@@ -87,6 +88,7 @@
             android:src="@drawable/ic_assignment_black_24dp"
             fab:fab_label="처방전 읽기"
             fab:fab_size="normal"
+            fab:fab_colorNormal="@color/colorAccent"
             android:onClick="onPrescriptionFAB"/>
 
     </com.github.clans.fab.FloatingActionMenu>

@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IntroActivity" />
+        <activity android:name=".IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MyTakingActivity" />
@@ -28,8 +29,7 @@
         <activity android:name=".AddPrescriptionActivity" />
         <activity android:name=".SearchDrugActivity" />
         <activity
-            android:name=".CloudVisionActivity"
-            android:screenOrientation="portrait"></activity>
+            android:name=".CloudVisionActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
