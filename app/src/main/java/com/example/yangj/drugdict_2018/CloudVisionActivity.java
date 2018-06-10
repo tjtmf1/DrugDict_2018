@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.force.infodb.ProductInfo;
 import com.github.ybq.android.spinkit.style.RotatingCircle;
 import com.github.ybq.android.spinkit.style.Wave;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -55,7 +56,7 @@ public class CloudVisionActivity extends AppCompatActivity {
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
 
-    private static  ArrayList<Drug> drugs;
+    private static  ArrayList<com.example.force.infodb.ProductInfo> drugs;
     private static String text = null;
     private ProgressBar progressBar;
     private static String uri;
@@ -364,7 +365,7 @@ public class CloudVisionActivity extends AppCompatActivity {
                 continue;
             } else {
                 if(!drug.equals("")){
-                    drugs.add(new Drug(drug));
+                    drugs.add(new ProductInfo(drug));
                     drug = "";
                 }
             }
