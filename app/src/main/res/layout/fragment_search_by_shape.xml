@@ -11,56 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/searchColor"
-                android:gravity="center"/>
-            <com.wefika.horizontalpicker.HorizontalPicker
-                android:id="@+id/colorPicker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                app:sideItems="2" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/searchShape"
-                android:gravity="center"/>
-            <com.wefika.horizontalpicker.HorizontalPicker
-                android:id="@+id/shapePicker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/searchDivisionLine"
-                android:gravity="center"/>
-            <com.wefika.horizontalpicker.HorizontalPicker
-                android:id="@+id/divisionPicker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"/>
-        </LinearLayout>
         <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
@@ -70,6 +20,15 @@
         android:clipToPadding="false"
         android:paddingLeft="183dp"
         android:paddingRight="183dp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clipToPadding="false"
+            android:paddingLeft="183dp"
+            android:paddingRight="183dp"  />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

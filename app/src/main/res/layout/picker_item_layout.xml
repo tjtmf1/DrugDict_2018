@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        android:src="@android:drawable/btn_star"/>
+        android:src="@drawable/ic_fiber_manual_record_transparent_24dp"/>
 
     <TextView
         android:id="@+id/picker_text"
