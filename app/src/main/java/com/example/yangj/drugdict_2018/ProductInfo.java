@@ -1,6 +1,8 @@
 package com.example.force.infodb;
 
-public class ProductInfo {
+import java.io.Serializable;
+
+public class ProductInfo implements Serializable{
     String mName;// 품목명
     String mimg; // 이미지
     String mShape;// 모양

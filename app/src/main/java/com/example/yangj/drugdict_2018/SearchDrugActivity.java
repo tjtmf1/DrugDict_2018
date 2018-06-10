@@ -2,6 +2,7 @@ package com.example.yangj.drugdict_2018;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,8 +20,11 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     ArrayList<com.example.force.infodb.ProductInfo> productInfos;
     ArrayList<ProductInfo> searchProducts;
     SearchListFragment fragment;
+    SearchListFragment bucketFragment;
     TabHost tabHost;
     DrugSearchListAdapter bucket;
+
+    static final int ADD_BUCKET = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +70,9 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         fragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.searchByName);
         fragment.setList(productInfos);
 
-        fragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.drugBucket);
+        bucketFragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.drugBucket);
         bucket = new DrugSearchListAdapter(getApplicationContext(), R.layout.drug_list_row, new ArrayList<ProductInfo>());
-        ((ListView)fragment.getView().findViewById(R.id.searchList)).setAdapter(bucket);
+        ((ListView)bucketFragment.getView().findViewById(R.id.searchList)).setAdapter(bucket);
 
         FragmentManager fragmentManager = getFragmentManager();
         // 새로 생성 해주는 부분
@@ -93,12 +97,6 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     public void SearchByShape(ArrayList<ProductInfo> list){
         fragment.setList(list);
         tabHost.setCurrentTab(0);
-        /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        SearchListFragment fragment = SearchListFragment.getInstance(list);
-        fragmentTransaction.replace(R.id.searchFrame, fragment, "shapeList");
-        fragmentTransaction.commit();
-
-        //fragment.setList(list, getApplicationContext());*/
     }
 
     @Override
@@ -112,6 +110,21 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     }
 
     public void SearchInteraction(View view) {
+    }
+
+    public void DrugDetail(ProductInfo p){
+        Intent intent = new Intent(this, DrugDetailActivity.class);
+        intent.putExtra("drug", p);
+        startActivityForResult(intent, ADD_BUCKET);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ADD_BUCKET){
+            ProductInfo p = (ProductInfo)data.getSerializableExtra("drug");
+            addBucket(p);
+        }
     }
 }
 

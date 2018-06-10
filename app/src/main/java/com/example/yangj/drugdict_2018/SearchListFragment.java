@@ -2,6 +2,7 @@ package com.example.yangj.drugdict_2018;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,8 +45,8 @@ public class SearchListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String name = list.get(position).getmName();
-                //Intent intent = (getActivity(), DrugDetailActivity.class);
+                com.example.force.infodb.ProductInfo p = list.get(position);
+                ((SearchDrugActivity)getActivity()).DrugDetail(p);
             }
         });
     }
