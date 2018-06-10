@@ -71,7 +71,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         fragment.setList(productInfos);
 
         bucketFragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.drugBucket);
-        bucket = new DrugSearchListAdapter(getApplicationContext(), R.layout.drug_list_row, new ArrayList<ProductInfo>());
+        bucket = new DrugSearchListAdapter(getApplicationContext(), R.layout.taking_drug_layout, new ArrayList<ProductInfo>());
         ((ListView)bucketFragment.getView().findViewById(R.id.searchList)).setAdapter(bucket);
 
         FragmentManager fragmentManager = getFragmentManager();

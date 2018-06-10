@@ -30,11 +30,11 @@ public class DrugSearchListAdapter extends ArrayAdapter<com.example.force.infodb
         View view = convertView;
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.drug_list_row, null);
+            view = layoutInflater.inflate(R.layout.taking_drug_layout, null);
         }
-        ImageView imageView = (ImageView) view.findViewById(R.id.list_row_image);
-        TextView textView = (TextView) view.findViewById(R.id.list_row_name);
-        imageView.setImageResource(android.R.drawable.btn_star);
+        ImageView imageView = (ImageView) view.findViewById(R.id.ivDrugImage);
+        TextView textView = (TextView) view.findViewById(R.id.tvDrugName);
+//        imageView.setImageResource(android.R.drawable.btn_star);
         textView.setText(productInfoList.get(position).getmName());
 
         return view;
