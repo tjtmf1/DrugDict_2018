@@ -52,12 +52,12 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
         android:text="처방전 읽는 중"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorBackground"
         android:textAlignment="center" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spinKit"
-        style="@style/SpinKitView.RotatingCircle"
+        style="@style/SpinKitView.Small.RotatingCircle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
