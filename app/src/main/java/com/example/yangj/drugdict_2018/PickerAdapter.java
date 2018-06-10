@@ -37,7 +37,7 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ColorPicke
     public void onBindViewHolder(ColorPicker holder, final int position) {
         ColorPicker colorPicker = holder;
         colorPicker.textView.setText(dataList.get(position));
-        
+
         colorPicker.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
