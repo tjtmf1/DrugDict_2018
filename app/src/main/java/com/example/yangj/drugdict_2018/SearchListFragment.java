@@ -55,6 +55,4 @@ public class SearchListFragment extends Fragment {
         this.list = list;
         setListView();
     }
-
-
 }

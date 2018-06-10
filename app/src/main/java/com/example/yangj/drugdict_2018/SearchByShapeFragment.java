@@ -22,8 +22,8 @@ public class SearchByShapeFragment extends Fragment {
 
     HorizontalPicker colorPicker, shapePicker, divisionPicker;
     static Context context;
-    String[] color = {"하양", "노랑", "주황", "분홍","빨강","갈색","연두","초록","청록","파랑","남색","자주","보라","회색","검정","투명"};
-    String[] shape = {"원형", "타원형","반원형","삼각형","사각형","마름모형","장방향","오각형","육각형","팔각형","기타"};
+    String[] color = {"전체" ,"하양", "노랑", "주황", "분홍","빨강","갈색","연두","초록","청록","파랑","남색","자주","보라","회색","검정","투명"};
+    String[] shape = {"전체" ,"원형", "타원형","반원형","삼각형","사각형","마름모형","장방향","오각형","육각형","팔각형","기타"};
     String[] divisionLine = {"없음","(-)형", "(+)형", "기타"};
     public SearchByShapeFragment() {
         // Required empty public constructor
@@ -42,6 +42,9 @@ public class SearchByShapeFragment extends Fragment {
         colorPicker.setValues(color);
         shapePicker.setValues(shape);
         divisionPicker.setValues(divisionLine);
+        colorPicker.setSelectedItem(2);
+        shapePicker.setSelectedItem(1);
+
         Button btn = (Button)view.findViewById(R.id.shapeSearchBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
