@@ -28,7 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_fiber_manual_record_black_24dp" />
+                            <entry key="color" value="fafafa" />
+                            <entry key="outputName" value="ic_fiber_manual_record_transparent_24dp" />
                             <entry key="sourceFile" value="C:\Users\yangj" />
                           </map>
                         </option>
