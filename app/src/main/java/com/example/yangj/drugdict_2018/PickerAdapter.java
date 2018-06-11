@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ColorPicker> {
@@ -93,12 +94,55 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ColorPicke
             case " ":
                 colorPicker.imageView.setImageResource(R.drawable.ic_fiber_manual_record_transparent_24dp);
                 break;
+            case "원형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_circled_thin_filled_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "타원형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_oval_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "삼각형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_triangle_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "사각형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_rectangular_30);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "마름모형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_rhombus_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "장방형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_pill_32);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "오각형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_pentagon_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "육각형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_hexagon_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "팔각형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_octagon_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "없음":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_round_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "(-)형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_round_minus_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
+            case "(+)형":
+                colorPicker.imageView.setImageResource(R.drawable.icons8_round_plus_50);
+                colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
+                break;
         }
-
-        //color.add(" ");
-        //        color.add("전체"); color.add("하양"); color.add("노랑"); color.add("주황"); color.add("분홍"); color.add("빨강");
-        //        color.add("갈색"); color.add("연두"); color.add("초록"); color.add("청록"); color.add("파랑"); color.add("남색");
-        //        color.add("자주"); color.add("보라"); color.add("회색"); color.add("검정"); color.add("투명"); color.add(" ");
         
         colorPicker.layout.setOnClickListener(new View.OnClickListener() {
             @Override
