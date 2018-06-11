@@ -81,8 +81,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="병용금기 검색"
-                        android:onClick="SearchInteraction"/>
+                        android:text="내 복용목록 추가"
+                        android:onClick="addMyTaking"/>
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

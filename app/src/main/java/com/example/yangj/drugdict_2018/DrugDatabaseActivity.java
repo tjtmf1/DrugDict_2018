@@ -23,6 +23,7 @@ public class DrugDatabaseActivity extends AppCompatActivity {
     boolean inItem, inName, inIng, inMixName, inMixIng, inProhbt;
     String medName, medIng, mixName, mixIng, prohbt;
     String key = "toQmUMAQ8Yz04EhUFiPbljHzwxWcbfIi6wnj%2Bttm7FMxLbpIfT1r8csVtspatccoGNGUEwyWYDL7KN8e2OvQLw%3D%3D";
+    static final int INTERACTION_SEARCH = 150;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +117,10 @@ public class DrugDatabaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
+        intent.putExtra("drug1", drugName1);
+        intent.putExtra("drug2", drugName2);
         intent.putExtra("interaction", "");
-        setResult(1, intent);
+        setResult(INTERACTION_SEARCH, intent);
         finish();
     }
 
