@@ -49,7 +49,10 @@ dependencies {
     implementation 'com.github.adityagohad:HorizontalPicker:1.0.1'
 
     implementation files('libs/jxl.jar')
+<<<<<<< HEAD
 
+=======
+>>>>>>> 702a6518d591782584fc2e28b7ba8a465a72bafe
     implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
