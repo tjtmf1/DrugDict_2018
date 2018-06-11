@@ -50,7 +50,7 @@ public class FirebaseHandler_MyTaking {
     }
 
     public void deleteDrug(String name){
-
+        db.child(name).removeValue();
     }
 
 

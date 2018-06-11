@@ -97,14 +97,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Log.v("uid : ", uid);
                             Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
                             intent.putExtra("uid", uid);
-
-                            FirebaseHandler_MyTaking handler = new FirebaseHandler_MyTaking(user.getUid());
-                            handler.addDrug(new ProductInfo("name1", "img", "shape", "1", "1", "1", "1"));
-                            handler.addDrug(new ProductInfo("name2", "img", "shape", "1", "1", "1", "1"));
-                            handler.addDrug(new ProductInfo("name3", "img", "shape", "1", "1", "1", "1"));
-                            handler.addDrug(new ProductInfo("name4", "img", "shape", "1", "1", "1", "1"));
-                            handler.addDrug(new ProductInfo("name5", "img", "shape", "1", "1", "1", "1"));
-
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.

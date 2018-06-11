@@ -15,12 +15,10 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class DrugDatabaseActivity extends AppCompatActivity {
 
-    EditText edit;
-    EditText edit2;
-    TextView status1;
     int page;
     boolean inItem, inName, inIng, inMixName, inMixIng, inProhbt;
     String medName, medIng, mixName, mixIng, prohbt;
@@ -31,25 +29,21 @@ public class DrugDatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drug_database);
         StrictMode.enableDefaults(); // 안드로이드앱 성능 최적화 즉각적인반응을위함
-        edit = (EditText) findViewById(R.id.edit);
-        edit2 = (EditText) findViewById(R.id.edit2);
-        status1 = (TextView) findViewById(R.id.result); //파싱된 결과확인
+        Intent intent = getIntent();
+        String drugName1 = intent.getStringExtra("drug1");
+        String drugName2 = intent.getStringExtra("drug2");
         inItem = false;inName = false;inIng = false; inMixName = false;
         inMixIng = false; inProhbt = false; page = 1;
         medName = null; medIng = null; mixName = null; mixIng = null; prohbt = null;
-        Intent intent = getIntent();
-        String str =intent.getStringExtra("Drugs");
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-        parseData();
+        parseData(drugName1, drugName2);
+        parseData(drugName2, drugName1);
     }
 
-    public void parseData() {
+    public void parseData(String drugName1, String drugName2) {
         try {
-            //URL url = new URL("http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=dgBh%2B8ZYTUUyqqnGYPCRg9lOwPxjHNdJIvQ7kPgfQYuZI3Uj0B0f85QoBRQ8%2F28wUfYbip%2Fsp4ba3KKYJf%2BjAg%3D%3D"
-            //        + "&numOfRows=10&pageNo="+page); //검색 URL부분
-
+            String searchDrug = URLEncoder.encode(drugName1);
             URL url = new URL("http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=" +
-                    key + "&numOfRows=10&pageNo=1");
+                    key + "&numOfRows=100&pageNo=1&itemName=" + searchDrug);
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserCreator.newPullParser();
 
@@ -106,8 +100,12 @@ public class DrugDatabaseActivity extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals("item")) {
-                            status1.setText(status1.getText() + "약명 : " + medName + "\n 약 성분: " + medIng + "\n 혼용약명 : " + mixName +
-                                    "\n 혼용약 성분 : " + mixIng + "\n 부작용 : " + prohbt + "\n");
+                            if(mixName.equals(drugName2)){
+                                Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
+                                intent.putExtra("interaction", prohbt);
+                                setResult(1, intent);
+                                finish();
+                            }
                             inItem = false;
                         }
                         break;
@@ -117,33 +115,13 @@ public class DrugDatabaseActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
+        intent.putExtra("interaction", "");
+        setResult(1, intent);
+        finish();
     }
 
-    public void mOnClick(View v) {
-        final String[] data = new String[1];
-        switch (v.getId()) {
-            case R.id.button:
-                new Thread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        data[0] = getXmlData();//아래 메소드를 호출하여 XML data를 파싱해서 String 객체로 얻어오기
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                // TODO Auto-generated method stub
-                                status1.setText(data[0]); //TextView에 문자열  data 출력
-                            }
-                        });
-                    }
-                }).start();
-                break;
-        }
-    }//mOnClick method
-
-    public String getXmlData() {
+   /* public String getXmlData() {
         String ans = "";
         StringBuffer buffer = new StringBuffer();
 //        String med1 = "스포라녹스캡슐(이트라코나졸)";
@@ -152,7 +130,7 @@ public class DrugDatabaseActivity extends AppCompatActivity {
         String med2 = edit2.getText().toString();
         String queryUrl = "http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=" +
                 key +
-                "&numOfRows=10&pageNo=" + String.valueOf(page);
+                "&numOfRows=100&pageNo=" + String.valueOf(page);
 
         try {
             URL url = new URL(queryUrl);
@@ -232,5 +210,5 @@ public class DrugDatabaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return ans;
-    }
+    }*/
 }

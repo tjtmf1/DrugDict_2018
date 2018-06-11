@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 
@@ -57,6 +58,28 @@ public class MyTakingActivity extends AppCompatActivity {
         handler.setHandler(mHandler);
         handler.getAllDrug();
 
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(mDrugList,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    handler.deleteDrug(((com.example.force.infodb.ProductInfo)adapter.getItem(position)).getmName());
+                                    mDrugs.remove(position);
+                                }
+                                adapter = new TakingDrugListAdapter(getApplicationContext(), R.layout.drug_list_row, mDrugs);
+                                listView.setAdapter(adapter);
+                            }
+                        });
+        mDrugList.setOnTouchListener(touchListener);
+        mDrugList.setOnScrollListener(touchListener.makeScrollListener());
+
+
     }
 
     public void onDrugFAB(View view) {
@@ -89,6 +112,7 @@ public class MyTakingActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         if(resultCode == RESULT_OK){
             switch (requestCode) {
                 case CLOUD_VISION:
@@ -103,13 +127,15 @@ public class MyTakingActivity extends AppCompatActivity {
 
                     break;
                 case ADD_PRESCRIPTION:
-                    mDrugs = (ArrayList) data.getSerializableExtra("useDrugs");
+                    ArrayList<com.example.force.infodb.ProductInfo> new_drug = (ArrayList) data.getSerializableExtra("useDrugs");
 
                     // firebase에 올려주는 작업
-
-                    adapter = new TakingDrugListAdapter(this, R.layout.taking_drug_layout, mDrugs);
+                    for(int i=0;i<new_drug.size();i++) {
+                        handler.addDrug(new_drug.get(i));
+                        //mDrugs.add(new_drug.get(i));
+                    }
+                    adapter = new TakingDrugListAdapter(getApplicationContext(), R.layout.drug_list_row, mDrugs);
                     mDrugList.setAdapter(adapter);
-
                     break;
             }
         }
