@@ -23,7 +23,8 @@
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MyTakingActivity" />
         <activity android:name=".AddDrugActivity" />
