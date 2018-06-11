@@ -8,14 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.force.infodb.ProductInfo;
 import com.squareup.picasso.Picasso;
 
-import java.net.URI;
-
 public class DrugDetailActivity extends AppCompatActivity {
-    com.example.force.infodb.ProductInfo drug;
+    ProductInfo drug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +30,10 @@ public class DrugDetailActivity extends AppCompatActivity {
         TextView drugColor = (TextView)findViewById(R.id.detailColor);
         //setText 하기.
 
-        Picasso.get().load(drug.getMimg()).into(drugImage);
-        drugName.setText(drug.getmName());
+        drugImage.setImageURI(Uri.parse(drug.getImg()));
+        drugName.setText(drug.getName());
         //drugCompany.setText(drug.getmCompany);
-        drugShape.setText(drug.getmShape());
+        //drugShape.setText(drug.getShape());
         //drugColor.setText(drug.getmColor);
 
     }
