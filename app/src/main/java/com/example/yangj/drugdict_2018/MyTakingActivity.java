@@ -29,7 +29,7 @@ public class MyTakingActivity extends AppCompatActivity {
     Handler mHandler;
     FirebaseHandler_MyTaking handler;
 
-    ArrayList<com.example.force.infodb.ProductInfo> mDrugs;
+    ArrayList<ProductInfo> mDrugs;
 
     private ListView mDrugList;
     private TakingDrugListAdapter adapter;
@@ -69,7 +69,7 @@ public class MyTakingActivity extends AppCompatActivity {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    handler.deleteDrug(((com.example.force.infodb.ProductInfo)adapter.getItem(position)).getmName());
+                                    handler.deleteDrug(((ProductInfo)adapter.getItem(position)).getName());
                                     mDrugs.remove(position);
                                 }
                                 adapter = new TakingDrugListAdapter(getApplicationContext(), R.layout.drug_list_row, mDrugs);
@@ -127,7 +127,7 @@ public class MyTakingActivity extends AppCompatActivity {
 
                     break;
                 case ADD_PRESCRIPTION:
-                    ArrayList<com.example.force.infodb.ProductInfo> new_drug = (ArrayList) data.getSerializableExtra("useDrugs");
+                    ArrayList<ProductInfo> new_drug = (ArrayList) data.getSerializableExtra("useDrugs");
 
                     // firebase에 올려주는 작업
                     for(int i=0;i<new_drug.size();i++) {

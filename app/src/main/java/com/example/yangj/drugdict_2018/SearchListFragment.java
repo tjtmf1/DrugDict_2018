@@ -19,11 +19,11 @@ import java.util.ArrayList;
 public class SearchListFragment extends Fragment {
 
     DrugSearchListAdapter adapter;
-    ArrayList<com.example.force.infodb.ProductInfo> list;
+    ArrayList<ProductInfo> list;
     public SearchListFragment() {
         // Required empty public constructor
     }
-    static SearchListFragment getInstance(ArrayList<com.example.force.infodb.ProductInfo> list){
+    static SearchListFragment getInstance(ArrayList<ProductInfo> list){
         SearchListFragment fragment = new SearchListFragment();
         fragment.list = list;
         return fragment;
@@ -45,13 +45,13 @@ public class SearchListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                com.example.force.infodb.ProductInfo p = list.get(position);
+                ProductInfo p = list.get(position);
                 ((SearchDrugActivity)getActivity()).DrugDetail(p);
             }
         });
     }
 
-    public void setList(ArrayList<com.example.force.infodb.ProductInfo> list){
+    public void setList(ArrayList<ProductInfo> list){
         this.list = list;
         setListView();
     }

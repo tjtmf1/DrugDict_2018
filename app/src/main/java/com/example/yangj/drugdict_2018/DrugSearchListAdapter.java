@@ -10,11 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.force.infodb.ProductInfo;
+
 
 import java.util.List;
 
-public class DrugSearchListAdapter extends ArrayAdapter<com.example.force.infodb.ProductInfo> {
+public class DrugSearchListAdapter extends ArrayAdapter<ProductInfo> {
     private List<ProductInfo> productInfoList;
     private Context context;
 
@@ -35,7 +35,7 @@ public class DrugSearchListAdapter extends ArrayAdapter<com.example.force.infodb
         ImageView imageView = (ImageView) view.findViewById(R.id.ivDrugImage);
         TextView textView = (TextView) view.findViewById(R.id.tvDrugName);
 //        imageView.setImageResource(android.R.drawable.btn_star);
-        textView.setText(productInfoList.get(position).getmName());
+        textView.setText(productInfoList.get(position).getName());
 
         return view;
     }

@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.force.infodb.ProductInfo;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,13 +21,13 @@ public class FirebaseHandler_MyTaking {
     Handler handler;
 
     static final int GET_COMPLETE = 100;
-    ArrayList<com.example.force.infodb.ProductInfo> taking;
+    ArrayList<ProductInfo> taking;
     FirebaseHandler_MyTaking(String uid) {
         db = FirebaseDatabase.getInstance().getReference("Taking/" + uid);
     }
 
-    public void addDrug(com.example.force.infodb.ProductInfo p){
-        db.child(p.getmName()).setValue(p);
+    public void addDrug(ProductInfo p){
+        db.child(p.getName()).setValue(p);
     }
 
     public void getAllDrug(){
@@ -37,7 +37,7 @@ public class FirebaseHandler_MyTaking {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()){
-                    taking.add(new ProductInfo(data.child("mName").getValue().toString()));
+//                    taking.add(new ProductInfo(data.child("mName").getValue().toString()));
                 }
                 handler.sendEmptyMessage(GET_COMPLETE);
             }

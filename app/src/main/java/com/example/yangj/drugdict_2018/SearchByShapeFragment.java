@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.force.infodb.ProductInfo;
 import com.wefika.horizontalpicker.HorizontalPicker;
 
 import java.util.ArrayList;
@@ -104,7 +103,7 @@ public class SearchByShapeFragment extends Fragment {
                 //검색후 프래그먼트 바꿔줌
 
                 ArrayList<ProductInfo> a = new ArrayList<>();
-                a.add(new ProductInfo("n", "s", "s", "1", "1", "1", "1"));
+                a.add(new ProductInfo("n", "s", "s", "1", "1", "1", "1","1","1"));
                 if(getActivity() instanceof callListListener){
                     ((callListListener) getActivity()).changeListView(a);
                 }
@@ -114,6 +113,6 @@ public class SearchByShapeFragment extends Fragment {
     }
 
     public interface callListListener{
-        public void changeListView(ArrayList<com.example.force.infodb.ProductInfo> list);
+        public void changeListView(ArrayList<ProductInfo> list);
     }
 }

@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.force.infodb.ProductInfo;
 
 import java.util.ArrayList;
 
@@ -22,8 +21,8 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     private ListView mDrugList;
     private ImageView mMainImage;
     private AddDrugListAdapter adapter;
-    private ArrayList<com.example.force.infodb.ProductInfo> drugs;
-    private ArrayList<com.example.force.infodb.ProductInfo> useDrugs;
+    private ArrayList<ProductInfo> drugs;
+    private ArrayList<ProductInfo> useDrugs;
 
     private String uri;
 
@@ -72,7 +71,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
         for(int i=0; i<drugs.size(); i++){
             if(checkBoxes.get(i).isChecked()){
-                useDrugs.add(new ProductInfo(editTexts.get(i).getText().toString()));
+//                useDrugs.add(new ProductInfo(editTexts.get(i).getText().toString()));
             }
         }
 

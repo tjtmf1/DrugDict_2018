@@ -1,5 +1,7 @@
 package com.example.yangj.drugdict_2018;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -22,35 +24,22 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public class ExcelData extends AppCompatActivity {
+public class ExcelData {
     DatabaseReference table;
     ArrayList<ProductInfo> pinfo; // 각 약의 정보들을 담은 List
     ArrayList<ProductInfo> arrayinfo;
     int RowEnd; // 엑셀의 끝 항목 번호
 
-//    EditText findByName; // 약명으로 검색
-//    EditText findByImg;  // 이미지로 검색
-//    EditText findByShape;  // 모양으로 검색
-//    EditText findByFcol;  // 전면색상으로 검색
-//    EditText findByBcol;  // 후면 색상으로 검색
-//    EditText findByFline;  // 전면 분할선으로 검색
-//    EditText findByBline;  // 후면 분할선으로 검색
-//    EditText findByComp; // 회사명으로 검색
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_excel_data);
+    ExcelData(){
         pinfo = new ArrayList<>();
         arrayinfo = new ArrayList<>();
     }
 
-    public void Excel() { // 엑셀 읽어오는 메서드
+    public void Excel(Activity activity) { // 엑셀 읽어오는 메서드
         Workbook workbook = null;
         Sheet sheet = null;
         try {
-            InputStream inputStream = getBaseContext().getResources().getAssets().open("info.xls");
+            InputStream inputStream = activity.getResources().getAssets().open("info.xls");
             workbook = Workbook.getWorkbook(inputStream);
             sheet = workbook.getSheet(0);
             int MaxColumn = 2, RowStart = 1, ColumnStart = 2, ColumnEnd = sheet.getRow(2).length - 1;
@@ -84,9 +73,9 @@ public class ExcelData extends AppCompatActivity {
         table = FirebaseDatabase.getInstance().getReference("MedInfo");
         for(int i = 0;i<1000;i++){ //  i<2000 <-데이터베이스에 2000개 데이터 넣기.
 //            table.push().setValue(pinfo.get(i));
-            //           table.child(pinfo.get(i).getName()).setValue(pinfo.get(i));
+                       table.child(pinfo.get(i).getName()).setValue(pinfo.get(i));
         }
-        table.child(pinfo.get(0).getName()).setValue(pinfo.get(0));
+//        table.child(pinfo.get(0).getName()).setValue(pinfo.get(0));
 //       table.child(pinfo.get(1).getName()).setValue(pinfo.get(1));
 
     } // makeDB
@@ -98,12 +87,7 @@ public class ExcelData extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 arrayinfo.clear();
-//                String img = findByImg.getText().toString();
-//                String shape = findByShape.getText().toString();
-//                String fcol = findByFcol.getText().toString();
-//                String bcol = findByBcol.getText().toString();
-//                String fline = findByFline.getText().toString();
-//                String bline = findByBline.getText().toString();
+
 
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
@@ -125,7 +109,7 @@ public class ExcelData extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+
             }
         });
         return arrayinfo;
@@ -149,7 +133,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+
             }
         });
         return arrayinfo;
@@ -173,7 +157,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
         return arrayinfo.get(0);
@@ -197,7 +181,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
         return arrayinfo;
@@ -221,7 +205,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -246,7 +230,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
         return arrayinfo;
@@ -269,7 +253,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
         return arrayinfo;
@@ -292,7 +276,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
         return arrayinfo;
@@ -316,7 +300,7 @@ public class ExcelData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
         return arrayinfo;

@@ -10,14 +10,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 
-import com.example.force.infodb.ProductInfo;
 
 import java.util.ArrayList;
 
 public class SearchDrugActivity extends AppCompatActivity implements SearchByShapeFragment.callListListener {
     ListView searchByName;
     EditText searchEdit;
-    ArrayList<com.example.force.infodb.ProductInfo> productInfos;
+    ArrayList<ProductInfo> productInfos;
     ArrayList<ProductInfo> searchProducts;
     SearchListFragment fragment;
     SearchListFragment bucketFragment;
@@ -57,15 +56,15 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         productInfos = new ArrayList<>();
         searchProducts = new ArrayList<>();
         // 데이터 가져오기
-        productInfos.add(new ProductInfo("name1", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name2", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name3", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name4", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name5", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name11", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name12", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name13", "img", "shape", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name41", "img", "shape", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name1", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name2", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name3", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name4", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name5", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name11", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name12", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name13", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name41", "img", "shape", "1", "1", "1", "1", "1", "1"));
 
         fragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.searchByName);
         fragment.setList(productInfos);
@@ -87,7 +86,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         String search = searchEdit.getText().toString();
         searchProducts.clear();
         for(ProductInfo p : productInfos){
-            if(p.getmName().contains(search)){
+            if(p.getName().contains(search)){
                 searchProducts.add(p);
             }
         }

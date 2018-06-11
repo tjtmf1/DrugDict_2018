@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class TakingDrugListAdapter extends ArrayAdapter {
 
     Context context;
-    ArrayList<com.example.force.infodb.ProductInfo> mDrugs;
+    ArrayList<ProductInfo> mDrugs;
 
     public TakingDrugListAdapter(@NonNull Context context, int resource, @NonNull ArrayList objects) {
         super(context, resource, objects);
@@ -35,12 +35,12 @@ public class TakingDrugListAdapter extends ArrayAdapter {
                     (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = layoutInflater.inflate(R.layout.taking_drug_layout, null);
 
-            com.example.force.infodb.ProductInfo drug = mDrugs.get(position);
+            ProductInfo drug = mDrugs.get(position);
             ImageView ivDrugImage = (ImageView) v.findViewById(R.id.ivDrugImage);
             TextView tvDrugName = (TextView) v.findViewById(R.id.tvDrugName);
             tvDrugName.setTextColor(Color.BLACK);
             //ivDrugImage.setImageResource(); // 약 이미지 추가
-            tvDrugName.setText(drug.getmName());
+            tvDrugName.setText(drug.getName());
         }
 
         return v;
