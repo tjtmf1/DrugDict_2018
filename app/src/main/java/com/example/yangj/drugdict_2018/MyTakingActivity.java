@@ -23,7 +23,7 @@ public class MyTakingActivity extends AppCompatActivity {
     FloatingActionButton drugFAB;
     FloatingActionButton prescriptionFAB;
 
-    ArrayList<Drug> mDrugs;
+    ArrayList<com.example.force.infodb.ProductInfo> mDrugs;
 
     private ListView mDrugList;
     private TakingDrugListAdapter adapter;

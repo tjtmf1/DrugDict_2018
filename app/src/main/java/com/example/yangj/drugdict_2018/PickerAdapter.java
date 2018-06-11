@@ -143,7 +143,7 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ColorPicke
                 colorPicker.imageView.setScaleType(ImageView.ScaleType.CENTER);
                 break;
         }
-        
+
         colorPicker.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

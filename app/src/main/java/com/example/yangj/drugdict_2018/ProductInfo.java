@@ -23,6 +23,9 @@ public class ProductInfo implements Serializable{
         mFrontLine = frontline;
         mBackLine = backline;
     }
+    public ProductInfo(String name){
+        mName = name;
+    }
 
     public void setMimg(String mimg) {
         this.mimg = mimg;
