@@ -47,11 +47,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
     implementation 'com.github.adityagohad:HorizontalPicker:1.0.1'
-<<<<<<< HEAD
+
     implementation files('libs/jxl.jar')
-=======
     implementation 'com.squareup.picasso:picasso:2.71828'
->>>>>>> 1199dce37c8e35355e5c29bbf14c5b6892e566b4
+
 }
 
 apply plugin: 'com.google.gms.google-services'
