@@ -1,8 +1,11 @@
 package com.example.yangj.drugdict_2018;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,12 +25,15 @@ public class MyTakingActivity extends AppCompatActivity {
 
     FloatingActionButton drugFAB;
     FloatingActionButton prescriptionFAB;
+    Handler mHandler;
+    FirebaseHandler_MyTaking handler;
 
     ArrayList<com.example.force.infodb.ProductInfo> mDrugs;
 
     private ListView mDrugList;
     private TakingDrugListAdapter adapter;
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +41,22 @@ public class MyTakingActivity extends AppCompatActivity {
 
         drugFAB = (FloatingActionButton) findViewById(R.id.drugFAB);
         prescriptionFAB = (FloatingActionButton) findViewById(R.id.prescriptionFAB);
-
-        mDrugs = new ArrayList<>();
-
         mDrugList = (ListView) findViewById(R.id.lvTakingDrugList);
-        adapter = new TakingDrugListAdapter(this, R.layout.taking_drug_layout, mDrugs);
-        mDrugList.setAdapter(adapter);
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what == FirebaseHandler_MyTaking.GET_COMPLETE){
+                    mDrugs = handler.getList();
+                    adapter = new TakingDrugListAdapter(getApplicationContext(), R.layout.taking_drug_layout, mDrugs);
+                    mDrugList.setAdapter(adapter);
+                }
+            }
+        };
+        handler = new FirebaseHandler_MyTaking(MainMenuActivity.uid);
+        handler.setHandler(mHandler);
+        handler.getAllDrug();
+
     }
 
     public void onDrugFAB(View view) {

@@ -20,16 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IntroActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MyTakingActivity" />
         <activity android:name=".AddDrugActivity" />
         <activity android:name=".AddPrescriptionActivity" />
         <activity android:name=".SearchDrugActivity" />
-        <activity
-            android:name=".CloudVisionActivity"></activity>
+        <activity android:name=".CloudVisionActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -43,7 +43,8 @@
 
         <activity android:name=".DrugDatabaseActivity" />
         <activity android:name=".PrecautionActivity" />
-        <activity android:name=".DrugDetailActivity"></activity>
+        <activity android:name=".DrugDetailActivity" />
+        <activity android:name=".MainMenuActivity"></activity>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.force.infodb.ProductInfo;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -94,8 +95,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             FirebaseUser user = mAuth.getCurrentUser();
                             String uid = user.getUid();
                             Log.v("uid : ", uid);
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
                             intent.putExtra("uid", uid);
+
+                            FirebaseHandler_MyTaking handler = new FirebaseHandler_MyTaking(user.getUid());
+                            handler.addDrug(new ProductInfo("name1", "img", "shape", "1", "1", "1", "1"));
+                            handler.addDrug(new ProductInfo("name2", "img", "shape", "1", "1", "1", "1"));
+                            handler.addDrug(new ProductInfo("name3", "img", "shape", "1", "1", "1", "1"));
+                            handler.addDrug(new ProductInfo("name4", "img", "shape", "1", "1", "1", "1"));
+                            handler.addDrug(new ProductInfo("name5", "img", "shape", "1", "1", "1", "1"));
+
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -147,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.v("uid", user.getUid());
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
                             intent.putExtra("uid", user.getUid());
                             startActivity(intent);
                         } else {
