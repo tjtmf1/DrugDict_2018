@@ -1,84 +1,105 @@
-package com.example.force.infodb;
+package com.example.yangj.drugdict_2018;
 
 import java.io.Serializable;
 
-public class ProductInfo implements Serializable{
-    String mName;// 품목명
-    String mimg; // 이미지
-    String mShape;// 모양
-    String mFrontCol;// 색상(앞)
-    String mBackCol;// 색상(뒤)
-    String mFrontLine;// 분할선(앞)
-    String mBackLine;// 분할선(뒤)
+public class ProductInfo implements Serializable {
+    String num;
+    String name;// 품목명
+    String img; // 이미지
+    String shape;// 모양
+    String frontCol;// 색상(앞)
+    String backCol;// 색상(뒤)
+    String frontLine;// 분할선(앞)
+    String backLine;// 분할선(뒤)
+    String compName; // 회사명
 
-
-
-    public ProductInfo(String name, String img, String shape, String frontcol,
-                       String backcol, String frontline, String backline){
-        mName = name;
-        mimg = img;
-        mShape = shape;
-        mFrontCol = frontcol;
-        mBackCol = backcol;
-        mFrontLine = frontline;
-        mBackLine = backline;
-    }
-    public ProductInfo(String name){
-        mName = name;
+    public ProductInfo() {
     }
 
-    public void setMimg(String mimg) {
-        this.mimg = mimg;
+
+
+    public ProductInfo(String num, String name, String img, String shape, String frontcol,
+                       String backcol, String frontline, String backline, String compName) {
+        this.num = num;
+        this.name = name;
+        this.img = img;
+        this.shape = shape;
+        this.frontCol = frontcol;
+        this.backCol = backcol;
+        this.frontLine = frontline;
+        this.backLine = backline;
+        this.compName = compName;
+
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public String getNum() {
+        return num;
     }
 
-    public void setmShape(String mShape) {
-        this.mShape = mShape;
+    public void setNum(String num) {
+        this.num = num;
     }
 
-    public void setmFrontCol(String mFrontCol) {
-        this.mFrontCol = mFrontCol;
+    public String getName() {
+        return name;
     }
 
-    public void setmBackCol(String mBackCol) {
-        this.mBackCol = mBackCol;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setmFrontLine(String mFrontLine) {
-        this.mFrontLine = mFrontLine;
+    public String getImg() {
+        return img;
     }
 
-    public void setmBackLine(String mBackLine) {
-        this.mBackLine = mBackLine;
-    }
-    public String getMimg() {
-        return mimg;
-    }
-    public String getmName() {
-
-        return mName;
+    public void setImg(String img) {
+        this.img = img;
     }
 
-    public String getmShape() {
-        return mShape;
+    public String getShape() {
+        return shape;
     }
 
-    public String getmFrontCol() {
-        return mFrontCol;
+    public void setShape(String shape) {
+        this.shape = shape;
     }
 
-    public String getmBackCol() {
-        return mBackCol;
+    public String getFrontCol() {
+        return frontCol;
     }
 
-    public String getmFrontLine() {
-        return mFrontLine;
+    public void setFrontCol(String frontCol) {
+        this.frontCol = frontCol;
     }
 
-    public String getmBackLine() {
-        return mBackLine;
+    public String getBackCol() {
+        return backCol;
+    }
+
+    public void setBackCol(String backCol) {
+        this.backCol = backCol;
+    }
+
+    public String getFrontLine() {
+        return frontLine;
+    }
+
+    public void setFrontLine(String frontLine) {
+        this.frontLine = frontLine;
+    }
+
+    public String getBackLine() {
+        return backLine;
+    }
+
+    public void setBackLine(String backLine) {
+        this.backLine = backLine;
+    }
+    public String getCompName() {
+        return compName;
+    }
+
+    public void setCompName(String compName) {
+        this.compName = compName;
     }
 }
