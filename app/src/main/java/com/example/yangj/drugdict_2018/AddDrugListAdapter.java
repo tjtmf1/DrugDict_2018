@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class AddDrugListAdapter extends ArrayAdapter {
     Context context;
-    ArrayList<com.example.force.infodb.ProductInfo> mDrugs;
+    ArrayList<ProductInfo> mDrugs;
     ArrayList<EditText> mEditTexts;
     ArrayList<CheckBox> mCheckBoxs;
 
@@ -40,7 +40,7 @@ public class AddDrugListAdapter extends ArrayAdapter {
                     (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = layoutInflater.inflate(R.layout.add_drug_layout, null);
 
-            com.example.force.infodb.ProductInfo drug = mDrugs.get(position);
+            ProductInfo drug = mDrugs.get(position);
             EditText etDetectDrug = (EditText) v.findViewById(R.id.etDetectDrug);
             CheckBox cbPrescription = (CheckBox) v.findViewById(R.id.cbPrescription);
 

@@ -22,8 +22,8 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     private ListView mDrugList;
     private ImageView mMainImage;
     private AddDrugListAdapter adapter;
-    private ArrayList<com.example.force.infodb.ProductInfo> drugs;
-    private ArrayList<com.example.force.infodb.ProductInfo> useDrugs;
+    private ArrayList<ProductInfo> drugs;
+    private ArrayList<ProductInfo> useDrugs;
 
     private String uri;
 
