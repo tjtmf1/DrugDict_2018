@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.force.infodb.ProductInfo;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -83,6 +84,8 @@ public class MyTakingActivity extends AppCompatActivity {
     }
 
     public void onDrugFAB(View view) {
+        Intent intent = new Intent(this, SearchDrugActivity.class);
+        startActivityForResult(intent, 0);
     }
 
     public void onPrescriptionFAB(View view) {
@@ -138,6 +141,15 @@ public class MyTakingActivity extends AppCompatActivity {
                     mDrugList.setAdapter(adapter);
                     break;
             }
+        } else if(resultCode == SearchDrugActivity.PUT_IN_BUCKET){
+            ArrayList<com.example.force.infodb.ProductInfo> new_drug = (ArrayList<ProductInfo>) data.getSerializableExtra("addDrug");
+            for(int i=0;i<new_drug.size();i++) {
+                handler.addDrug(new_drug.get(i));
+                mDrugs.add(new_drug.get(i));
+            }
+            adapter = new TakingDrugListAdapter(getApplicationContext(), R.layout.drug_list_row, mDrugs);
+            mDrugList.setAdapter(adapter);
+
         }
     }
 }

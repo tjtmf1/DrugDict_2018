@@ -19,12 +19,14 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     EditText searchEdit;
     ArrayList<com.example.force.infodb.ProductInfo> productInfos;
     ArrayList<ProductInfo> searchProducts;
+    ArrayList<ProductInfo> bucketDrug;
     SearchListFragment fragment;
     SearchListFragment bucketFragment;
     TabHost tabHost;
     DrugSearchListAdapter bucket;
 
     static final int ADD_BUCKET = 100;
+    static final int PUT_IN_BUCKET = 50;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +73,29 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         fragment.setList(productInfos);
 
         bucketFragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.drugBucket);
-        bucket = new DrugSearchListAdapter(getApplicationContext(), R.layout.taking_drug_layout, new ArrayList<ProductInfo>());
-        ((ListView)bucketFragment.getView().findViewById(R.id.searchList)).setAdapter(bucket);
+        bucketDrug = new ArrayList<>();
+        bucket = new DrugSearchListAdapter(getApplicationContext(), R.layout.taking_drug_layout, bucketDrug);
+        ListView bucketList = (ListView) bucketFragment.getView().findViewById(R.id.searchList);
+        bucketList.setAdapter(bucket);
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(bucketList,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    bucket.remove(bucket.getItem(position));
+                                }
+                                bucket.notifyDataSetChanged();
+                            }
+                        });
+        bucketList.setOnTouchListener(touchListener);
+        bucketList.setOnScrollListener(touchListener.makeScrollListener());
 
         FragmentManager fragmentManager = getFragmentManager();
         // 새로 생성 해주는 부분
@@ -109,9 +132,6 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         bucket.notifyDataSetChanged();
     }
 
-    public void SearchInteraction(View view) {
-    }
-
     public void DrugDetail(ProductInfo p){
         Intent intent = new Intent(this, DrugDetailActivity.class);
         intent.putExtra("drug", p);
@@ -125,6 +145,13 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
             ProductInfo p = (ProductInfo)data.getSerializableExtra("drug");
             addBucket(p);
         }
+    }
+
+    public void addMyTaking(View view) {
+        Intent intent = new Intent(this, MyTakingActivity.class);
+        intent.putExtra("addDrug", bucketDrug);
+        setResult(PUT_IN_BUCKET, intent);
+        finish();
     }
 }
 

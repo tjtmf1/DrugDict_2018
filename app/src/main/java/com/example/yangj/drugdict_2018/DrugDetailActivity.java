@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.force.infodb.ProductInfo;
+import com.squareup.picasso.Picasso;
 
 import java.net.URI;
 
@@ -31,7 +33,7 @@ public class DrugDetailActivity extends AppCompatActivity {
         TextView drugColor = (TextView)findViewById(R.id.detailColor);
         //setText 하기.
 
-        drugImage.setImageURI(Uri.parse(drug.getMimg()));
+        Picasso.get().load(drug.getMimg()).into(drugImage);
         drugName.setText(drug.getmName());
         //drugCompany.setText(drug.getmCompany);
         drugShape.setText(drug.getmShape());
@@ -43,5 +45,6 @@ public class DrugDetailActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("drug", drug);
         setResult(SearchDrugActivity.ADD_BUCKET, intent);
+        Toast.makeText(this, "바구니에 추가되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }
