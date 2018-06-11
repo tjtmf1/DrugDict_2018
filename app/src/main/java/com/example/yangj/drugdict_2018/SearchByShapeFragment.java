@@ -28,9 +28,11 @@ public class SearchByShapeFragment extends Fragment {
 
     static Context context;
     List<String> color;
+    List<String> shape;
+    List<String> divisionLine;
     //String[] color = {"전체" ,"하양", "노랑", "주황", "분홍","빨강","갈색","연두","초록","청록","파랑","남색","자주","보라","회색","검정","투명"};
-    String[] shape = {"전체" ,"원형", "타원형","반원형","삼각형","사각형","마름모형","장방향","오각형","육각형","팔각형","기타"};
-    String[] divisionLine = {"없음","(-)형", "(+)형", "기타"};
+    //String[] shape = {"전체" ,"원형", "타원형","반원형","삼각형","사각형","마름모형","장방형","오각형","육각형","팔각형","기타"};
+    //String[] divisionLine = {"없음","(-)형", "(+)형", "기타"};
     public SearchByShapeFragment() {
         // Required empty public constructor
     }
@@ -40,6 +42,13 @@ public class SearchByShapeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        divisionLine = new ArrayList<>(); divisionLine.add(" ");
+        divisionLine.add("없음"); divisionLine.add("(-)형"); divisionLine.add("(+)형"); divisionLine.add(" ");
+
+        shape = new ArrayList<>(); shape.add(" ");
+        shape.add("전체"); shape.add("원형"); shape.add("타원형"); shape.add("삼각형"); shape.add("사각형");
+        shape.add("마름모형"); shape.add("장방형"); shape.add("오각형"); shape.add("육각형"); shape.add("팔각형"); shape.add(" ");
 
         color = new ArrayList<>(); color.add(" ");
         color.add("전체"); color.add("하양"); color.add("노랑"); color.add("주황"); color.add("분홍"); color.add("빨강");
@@ -65,15 +74,28 @@ public class SearchByShapeFragment extends Fragment {
         RecyclerView recyclerView2 = (RecyclerView)view.findViewById(R.id.rv2);
         PickerLayoutManager pickerLayoutManager2 = new PickerLayoutManager(getActivity(), PickerLayoutManager.HORIZONTAL, false);
         pickerLayoutManager2.setChangeAlpha(true);
-        pickerLayoutManager2.setScaleDownBy(0.5f);
-        pickerLayoutManager2.setScaleDownDistance(0.5f);
+        pickerLayoutManager2.setScaleDownBy(0.99f);
+        pickerLayoutManager2.setScaleDownDistance(0.8f);
 
         SnapHelper snapHelper2 = new LinearSnapHelper();
         snapHelper2.attachToRecyclerView(recyclerView2);
 
         recyclerView2.setLayoutManager(pickerLayoutManager2);
-        PickerAdapter adapter2 = new PickerAdapter(getContext(), color, recyclerView2);
+        PickerAdapter adapter2 = new PickerAdapter(getContext(), shape, recyclerView2);
         recyclerView2.setAdapter(adapter2);
+
+        RecyclerView recyclerView3 = (RecyclerView)view.findViewById(R.id.rv3);
+        PickerLayoutManager pickerLayoutManager3 = new PickerLayoutManager(getActivity(), PickerLayoutManager.HORIZONTAL, false);
+        pickerLayoutManager3.setChangeAlpha(true);
+        pickerLayoutManager3.setScaleDownBy(0.99f);
+        pickerLayoutManager3.setScaleDownDistance(0.1f);
+
+        SnapHelper snapHelper3 = new LinearSnapHelper();
+        snapHelper3.attachToRecyclerView(recyclerView3);
+
+        recyclerView3.setLayoutManager(pickerLayoutManager3);
+        PickerAdapter adapter3 = new PickerAdapter(getContext(), divisionLine, recyclerView3);
+        recyclerView3.setAdapter(adapter3);
 
         Button btn = (Button)view.findViewById(R.id.shapeSearchBtn);
         btn.setOnClickListener(new View.OnClickListener() {

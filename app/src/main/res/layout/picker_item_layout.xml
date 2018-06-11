@@ -10,7 +10,7 @@
         android:id="@+id/picker_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+        android:layout_weight="18"
         android:src="@drawable/ic_fiber_manual_record_transparent_24dp"/>
 
     <TextView
