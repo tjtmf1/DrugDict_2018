@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.force.infodb.ProductInfo;
+
 
 import java.net.URI;
 
 public class DrugDetailActivity extends AppCompatActivity {
-    com.example.force.infodb.ProductInfo drug;
+    ProductInfo drug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,10 @@ public class DrugDetailActivity extends AppCompatActivity {
         TextView drugColor = (TextView)findViewById(R.id.detailColor);
         //setText 하기.
 
-        drugImage.setImageURI(Uri.parse(drug.getMimg()));
-        drugName.setText(drug.getmName());
+        drugImage.setImageURI(Uri.parse(drug.getImg()));
+        drugName.setText(drug.getName());
         //drugCompany.setText(drug.getmCompany);
-        drugShape.setText(drug.getmShape());
+        drugShape.setText(drug.getShape());
         //drugColor.setText(drug.getmColor);
 
     }
