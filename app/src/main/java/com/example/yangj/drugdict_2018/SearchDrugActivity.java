@@ -118,7 +118,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
                     case ExcelData.SEARCH_BY_NAME:
                         searchProducts = excelData.getArrayinfo();
                         fragment.setList(searchProducts);
-                        //dialog.dismiss();
+                        dialog.dismiss();
                         break;
                     case ExcelData.SEARCH_INFO:
                         searchProducts = excelData.getArrayinfo();
@@ -128,7 +128,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
             }
         };
         excelData.setHandler(handler);
-        dialog = new LoadingDialog(getApplicationContext());
+        dialog = new LoadingDialog(this);
     }
 
 
@@ -140,8 +140,8 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
                 searchProducts.add(p);
             }
         }*/
+        dialog.show();
         excelData.showInfoByName(search);
-        //dialog.show();
         //fragment.setList(searchProducts);
     }
 
