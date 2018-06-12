@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/DrugDict_2018.iml" filepath="$PROJECT_DIR$/DrugDict_2018.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/DrugDic_2018.iml" filepath="$PROJECT_DIR$/DrugDic_2018.iml" />
+>>>>>>> c322d730d303301e50c9a0140ce53d9e88476432
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
