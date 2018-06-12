@@ -68,15 +68,13 @@ public class ExcelData {
         }
     } // Excel
 
-    public void excelToFirebase(){ // 파이어베이스에 낱알정보 데이터 넣기
-
+    public void excelToFirebase(Activity activity){ // 파이어베이스에 낱알정보 데이터 넣기
+        Excel(activity);
         table = FirebaseDatabase.getInstance().getReference("MedInfo");
-        for(int i = 0;i<1000;i++){ //  i<2000 <-데이터베이스에 2000개 데이터 넣기.
-//            table.push().setValue(pinfo.get(i));
-                       table.child(pinfo.get(i).getName()).setValue(pinfo.get(i));
+        for(int i = 0;i<RowEnd;i++){ //  i<2000 <-데이터베이스에 2000개 데이터 넣기.
+            table.child(pinfo.get(i).getName()).setValue(pinfo.get(i));
         }
-//        table.child(pinfo.get(0).getName()).setValue(pinfo.get(0));
-//       table.child(pinfo.get(1).getName()).setValue(pinfo.get(1));
+
 
     } // makeDB
 
@@ -88,24 +86,18 @@ public class ExcelData {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 arrayinfo.clear();
 
-
-
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
                     ProductInfo info = snapshot.getValue(ProductInfo.class);
-                    if(info.getImg().equals(img)){
-                        if (info.getShape().equals(shape)){
-                            if (info.getFrontCol().equals(fcol)){
-                                if(info.getBackCol().equals(bcol)){
-                                    if(info.getFrontLine().equals(fline)){
-                                        if(info.getBackLine().equals(bline)){
-                                            arrayinfo.add(info);
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    if (info.getImg().equals(img) &&
+                            info.getShape().equals(shape) &&
+                            info.getFrontCol().equals(fcol) &&
+                            info.getBackCol().equals(bcol) &&
+                            info.getFrontLine().equals(fline) &&
+                            info.getBackLine().equals(bline)) {
+                        arrayinfo.add(info);
                     }
                 }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -139,7 +131,7 @@ public class ExcelData {
         return arrayinfo;
     }
 
-    public ProductInfo showInfoByName(String name){ // 약 이름으로 정보 찾기
+    public ArrayList<ProductInfo> showInfoByName(String name){ // 약 이름으로 정보 찾기
         arrayinfo.clear();
         table = FirebaseDatabase.getInstance().getReference("MedInfo");
         table.addValueEventListener(new ValueEventListener() {
@@ -160,7 +152,7 @@ public class ExcelData {
 //                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
-        return arrayinfo.get(0);
+        return arrayinfo;
     }
 
     public ArrayList<ProductInfo> searchByShape(String shape){// 모양 입력시 일치하는 ProductInfo 객체 반환
