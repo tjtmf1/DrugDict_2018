@@ -72,6 +72,12 @@ public class ExcelData {
         Excel(activity);
         table = FirebaseDatabase.getInstance().getReference("MedInfo");
         for(int i = 0;i<RowEnd;i++){ //  i<2000 <-데이터베이스에 2000개 데이터 넣기.
+            if(!pinfo.get(i).getName().contains(".")
+                    ||!pinfo.get(i).getName().contains("$")
+                    ||pinfo.get(i).getName().contains("[")
+                    ||pinfo.get(i).getName().contains("]")
+                    ||pinfo.get(i).getName().contains("#")
+                    ||pinfo.get(i).getName().contains("/"))
             table.child(pinfo.get(i).getName()).setValue(pinfo.get(i));
         }
 
