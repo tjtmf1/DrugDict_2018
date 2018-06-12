@@ -3,6 +3,7 @@ package com.example.yangj.drugdict_2018;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,11 +30,16 @@ public class ExcelData {
     ArrayList<ProductInfo> pinfo; // 각 약의 정보들을 담은 List
     ArrayList<ProductInfo> arrayinfo;
     int RowEnd; // 엑셀의 끝 항목 번호
+    Handler handler;
 
+    static final int SEARCH_BY_NAME = 90;
+    static final int SEARCH_INFO = 40;
     ExcelData(){
         pinfo = new ArrayList<>();
         arrayinfo = new ArrayList<>();
     }
+
+    public void setHandler(Handler handler){this.handler = handler;}
 
     public void Excel(Activity activity) { // 엑셀 읽어오는 메서드
         Workbook workbook = null;
@@ -103,6 +109,7 @@ public class ExcelData {
                         arrayinfo.add(info);
                     }
                 }
+                handler.sendEmptyMessage(SEARCH_INFO);
 
             }
             @Override
@@ -151,6 +158,7 @@ public class ExcelData {
                         arrayinfo.add(info);
                     }
                 }
+                handler.sendEmptyMessage(SEARCH_BY_NAME);
             }
 
             @Override
@@ -304,4 +312,7 @@ public class ExcelData {
         return arrayinfo;
     }
 
+    public ArrayList<ProductInfo> getArrayinfo() {
+        return arrayinfo;
+    }
 }

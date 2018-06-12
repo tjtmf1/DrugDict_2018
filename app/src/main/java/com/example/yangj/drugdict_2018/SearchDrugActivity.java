@@ -1,9 +1,12 @@
 package com.example.yangj.drugdict_2018;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -23,7 +26,9 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     SearchListFragment bucketFragment;
     TabHost tabHost;
     DrugSearchListAdapter bucket;
-
+    Handler handler;
+    ExcelData excelData;
+    LoadingDialog dialog;
     static final int ADD_BUCKET = 100;
     static final int PUT_IN_BUCKET = 50;
     @Override
@@ -33,6 +38,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         init();
     }
 
+    @SuppressLint("HandlerLeak")
     public void init() {
         //////////////////////////탭바 설정 시작
         tabHost = (TabHost) findViewById(R.id.tabHost);
@@ -58,7 +64,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         productInfos = new ArrayList<>();
         searchProducts = new ArrayList<>();
         // 데이터 가져오기
-        productInfos.add(new ProductInfo("name1", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        /*productInfos.add(new ProductInfo("name1", "img", "shape", "1", "1", "1", "1", "1", "1"));
         productInfos.add(new ProductInfo("name2", "img", "shape", "1", "1", "1", "1", "1", "1"));
         productInfos.add(new ProductInfo("name3", "img", "shape", "1", "1", "1", "1", "1", "1"));
         productInfos.add(new ProductInfo("name4", "img", "shape", "1", "1", "1", "1", "1", "1"));
@@ -66,7 +72,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         productInfos.add(new ProductInfo("name11", "img", "shape", "1", "1", "1", "1", "1", "1"));
         productInfos.add(new ProductInfo("name12", "img", "shape", "1", "1", "1", "1", "1", "1"));
         productInfos.add(new ProductInfo("name13", "img", "shape", "1", "1", "1", "1", "1", "1"));
-        productInfos.add(new ProductInfo("name41", "img", "shape", "1", "1", "1", "1", "1", "1"));
+        productInfos.add(new ProductInfo("name41", "img", "shape", "1", "1", "1", "1", "1", "1"));*/
 
         fragment = (SearchListFragment) getFragmentManager().findFragmentById(R.id.searchByName);
         fragment.setList(productInfos);
@@ -102,18 +108,41 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         SearchByShapeFragment fragment1 = new SearchByShapeFragment();
         fragmentTransaction.add(R.id.searchFrame, fragment1, "searchShape");
         fragmentTransaction.commit();
+
+        excelData = new ExcelData();
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what){
+                    case ExcelData.SEARCH_BY_NAME:
+                        searchProducts = excelData.getArrayinfo();
+                        fragment.setList(searchProducts);
+                        //dialog.dismiss();
+                        break;
+                    case ExcelData.SEARCH_INFO:
+                        searchProducts = excelData.getArrayinfo();
+
+                        break;
+                }
+            }
+        };
+        excelData.setHandler(handler);
+        dialog = new LoadingDialog(getApplicationContext());
     }
 
 
     public void SearchByName(View view) {
         String search = searchEdit.getText().toString();
-        searchProducts.clear();
+        /*searchProducts.clear();
         for(ProductInfo p : productInfos){
             if(p.getName().contains(search)){
                 searchProducts.add(p);
             }
-        }
-        fragment.setList(searchProducts);
+        }*/
+        excelData.showInfoByName(search);
+        //dialog.show();
+        //fragment.setList(searchProducts);
     }
 
     public void SearchByShape(ArrayList<ProductInfo> list){
@@ -141,8 +170,10 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == ADD_BUCKET){
-            ProductInfo p = (ProductInfo)data.getSerializableExtra("drug");
-            addBucket(p);
+            if(resultCode == ADD_BUCKET) {
+                ProductInfo p = (ProductInfo) data.getSerializableExtra("drug");
+                addBucket(p);
+            }
         }
     }
 

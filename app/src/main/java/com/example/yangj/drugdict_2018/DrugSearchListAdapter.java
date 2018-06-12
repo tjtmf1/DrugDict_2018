@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class DrugSearchListAdapter extends ArrayAdapter<ProductInfo> {
         }
         ImageView imageView = (ImageView) view.findViewById(R.id.ivDrugImage);
         TextView textView = (TextView) view.findViewById(R.id.tvDrugName);
-//        imageView.setImageResource(android.R.drawable.btn_star);
+        Picasso.get().load(productInfoList.get(position).getImg()).into(imageView);
         textView.setText(productInfoList.get(position).getName());
 
         return view;
