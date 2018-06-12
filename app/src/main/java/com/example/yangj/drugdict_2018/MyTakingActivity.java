@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.force.infodb.ProductInfo;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -142,7 +141,7 @@ public class MyTakingActivity extends AppCompatActivity {
                     break;
             }
         } else if(resultCode == SearchDrugActivity.PUT_IN_BUCKET){
-            ArrayList<com.example.force.infodb.ProductInfo> new_drug = (ArrayList<ProductInfo>) data.getSerializableExtra("addDrug");
+            ArrayList<ProductInfo> new_drug = (ArrayList<ProductInfo>) data.getSerializableExtra("addDrug");
             for(int i=0;i<new_drug.size();i++) {
                 handler.addDrug(new_drug.get(i));
                 mDrugs.add(new_drug.get(i));
