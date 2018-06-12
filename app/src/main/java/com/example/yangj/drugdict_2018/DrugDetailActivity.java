@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ public class DrugDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drug_detail);
         Intent intent = getIntent();
         drug = (ProductInfo) intent.getSerializableExtra("drug");
+
+        setupToolBar();
 
         //이름으로 drug 찾기.
 
@@ -37,7 +41,23 @@ public class DrugDetailActivity extends AppCompatActivity {
 
     }
 
-    public void addDrugInBucket(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar_drug_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
+    }
+
+    public void setupToolBar(){
+        getSupportActionBar().setTitle("약 추가");
+    }
+
+    public void onSaveBasket(MenuItem item) {
         Intent intent = new Intent();
         intent.putExtra("drug", drug);
         setResult(SearchDrugActivity.ADD_BUCKET, intent);
