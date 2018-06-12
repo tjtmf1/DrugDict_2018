@@ -12,82 +12,127 @@
         <ImageView
             android:id="@+id/detailImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:src="@android:drawable/btn_star"
             android:scaleType="fitXY"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorUnderLine"></View>
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorUnderLine"></View>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/detailName"
-                android:textSize="20sp"
-                android:gravity="right"/>
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/colorUnderLine"/>
             <TextView
                 android:id="@+id/detailName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:layout_weight="2.5"
+                android:layout_gravity="center_vertical"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
                 android:text="이름"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorUnderLine"></View>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/detailCompany"
-                android:textSize="20sp"
-                android:gravity="right"/>
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/colorUnderLine"/>
             <TextView
                 android:id="@+id/detailCompany"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:layout_weight="2.5"
+                android:layout_gravity="center_vertical"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
                 android:text="회사"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorUnderLine"></View>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/detailShape"
-                android:textSize="20sp"
-                android:gravity="right"/>
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/colorUnderLine"/>
             <TextView
                 android:id="@+id/detailShape"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:layout_weight="2.5"
+                android:layout_gravity="center_vertical"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
                 android:text="모양"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorUnderLine"></View>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/detailColor"
-                android:textSize="20sp"
-                android:gravity="right"/>
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/colorUnderLine"/>
             <TextView
                 android:id="@+id/detailColor"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:layout_weight="2.5"
+                android:layout_gravity="center_vertical"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
                 android:text="색상"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorUnderLine"></View>
     </LinearLayout>
 </ScrollView>
