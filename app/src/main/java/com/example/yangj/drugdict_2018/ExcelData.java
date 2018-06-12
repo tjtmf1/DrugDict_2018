@@ -94,12 +94,12 @@ public class ExcelData {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
                     ProductInfo info = snapshot.getValue(ProductInfo.class);
-                    if (info.getImg().equals(img) &&
-                            info.getShape().equals(shape) &&
-                            info.getFrontCol().equals(fcol) &&
-                            info.getBackCol().equals(bcol) &&
-                            info.getFrontLine().equals(fline) &&
-                            info.getBackLine().equals(bline)) {
+                    if ((info.getImg().equals(img)||info.getImg().equals(null)) &&
+                            (info.getShape().equals(shape)||info.getShape().equals(null)) &&
+                            (info.getFrontCol().equals(fcol)||info.getFrontCol().equals(null)) &&
+                            (info.getBackCol().equals(bcol)||info.getBackCol().equals(null)) &&
+                            (info.getFrontLine().equals(fline)||info.getFrontLine().equals(null)) &&
+                            (info.getBackLine().equals(bline)||info.getBackLine().equals(null))){
                         arrayinfo.add(info);
                     }
                 }
