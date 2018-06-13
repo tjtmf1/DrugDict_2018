@@ -34,6 +34,7 @@ public class SearchByShapeFragment extends Fragment {
     List<String> divisionLine;
     Handler handler;
     ExcelData excelData;
+    LoadingDialog dialog;
     //String[] color = {"전체" ,"하양", "노랑", "주황", "분홍","빨강","갈색","연두","초록","청록","파랑","남색","자주","보라","회색","검정","투명"};
     //String[] shape = {"전체" ,"원형", "타원형","반원형","삼각형","사각형","마름모형","장방형","오각형","육각형","팔각형","기타"};
     //String[] divisionLine = {"없음","(-)형", "(+)형", "기타"};
@@ -139,17 +140,23 @@ public class SearchByShapeFragment extends Fragment {
                 if(msg.what == ExcelData.SEARCH_INFO){
                     ArrayList<ProductInfo> list = excelData.getArrayinfo();
                     if(getActivity() instanceof callListListener){
+                        dialog.dismiss();
                         ((callListListener) getActivity()).changeListView(list);
                     }
                 }
             }
         };
 
+        dialog = new LoadingDialog(context);
+        dialog.setTextViewText("약 검색 중");
+
         Button btn = (Button)view.findViewById(R.id.shapeSearchBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //검색후 프래그먼트 바꿔줌
+
+                dialog.show();
                 excelData = new ExcelData();
                 excelData.setHandler(handler);
                 excelData.searchByInfo(colorString, shapeString, divisionString);

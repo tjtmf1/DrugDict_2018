@@ -40,6 +40,8 @@ public class MyTakingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_taking);
 
+        setupToolBar();
+
         drugFAB = (FloatingActionButton) findViewById(R.id.drugFAB);
         prescriptionFAB = (FloatingActionButton) findViewById(R.id.prescriptionFAB);
         mDrugList = (ListView) findViewById(R.id.lvTakingDrugList);
@@ -80,6 +82,10 @@ public class MyTakingActivity extends AppCompatActivity {
         mDrugList.setOnScrollListener(touchListener.makeScrollListener());
 
 
+    }
+
+    public void setupToolBar(){
+        getSupportActionBar().setTitle("백약사전");
     }
 
     public void onDrugFAB(View view) {

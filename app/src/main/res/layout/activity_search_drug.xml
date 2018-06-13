@@ -78,12 +78,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="4"/>
-                    <Button
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="내 복용목록 추가"
-                        android:onClick="addMyTaking"/>
+                        android:layout_weight="1">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@color/colorPrimaryDark"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="복용 목록에 추가"
+                            android:onClick="addMyTaking"
+                            android:textColor="#ffffff"/>
+                    </RelativeLayout>
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
