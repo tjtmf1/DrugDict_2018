@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DrugDict_2018</string>
+    <string name="app_name">백약사전</string>
     <string name="id_hint">ID</string>
     <string name="password_hint">Password</string>
     <string name="LoginButton">Login</string>
