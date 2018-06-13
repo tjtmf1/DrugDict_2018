@@ -101,10 +101,12 @@ public class DrugDatabaseActivity extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals("item")) {
-                            if(mixName.equals(drugName2)){
+                            if(mixName.contains(drugName2)){
                                 Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
                                 intent.putExtra("interaction", prohbt);
-                                setResult(1, intent);
+                                intent.putExtra("drug1", drugName1);
+                                intent.putExtra("drug2", drugName2);
+                                setResult(INTERACTION_SEARCH, intent);
                                 finish();
                             }
                             inItem = false;

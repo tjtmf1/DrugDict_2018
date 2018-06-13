@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.github.adityagohad:HorizontalPicker:1.0.1'
     implementation files('libs/jxl.jar')
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation  'com.koushikdutta.ion:ion:2.+'
 }
 
 apply plugin: 'com.google.gms.google-services'
