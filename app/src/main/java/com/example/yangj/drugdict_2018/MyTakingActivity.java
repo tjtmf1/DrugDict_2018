@@ -186,7 +186,24 @@ public class MyTakingActivity extends AppCompatActivity {
             String interaction = data.getStringExtra("interaction");
             String drug1 = data.getStringExtra("drug1");
             String drug2 = data.getStringExtra("drug2");
-            Toast.makeText(this, data.getStringExtra("interaction"), Toast.LENGTH_SHORT).show();
+            if(!interaction.equals("")){
+                showPrecautionDialog(interaction, drug1, drug2);
+            }
         }
+    }
+
+    public void showPrecautionDialog(String interaction, String drug1, String drug2){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.precaution_dialog_title);
+        builder.setMessage("[" + drug1 + "]" + "과(와) " + "[" + drug2 + "]" + "을(를) 함께 복용할 시 " +
+                "[" + interaction + "]" + " 부작용 발생");
+        builder.setPositiveButton(R.string.precaution_dialog_positive_btn,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        builder.show();
     }
 }

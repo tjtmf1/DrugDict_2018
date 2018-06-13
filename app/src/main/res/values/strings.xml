@@ -26,4 +26,7 @@
     <string name="detailColor">색상</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="precaution_dialog_title">병용금기 알람</string>
+    <string name="precaution_dialog_positive_btn">OK</string>
 </resources>
