@@ -42,17 +42,17 @@ public class SearchByShapeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        divisionLine = new ArrayList<>(); divisionLine.add(" ");
-        divisionLine.add("없음"); divisionLine.add("(-)형"); divisionLine.add("(+)형"); divisionLine.add(" ");
+        divisionLine = new ArrayList<>();
+        divisionLine.add("없음"); divisionLine.add("(-)형"); divisionLine.add("(+)형");
 
-        shape = new ArrayList<>(); shape.add(" ");
+        shape = new ArrayList<>();
         shape.add("전체"); shape.add("원형"); shape.add("타원형"); shape.add("삼각형"); shape.add("사각형");
-        shape.add("마름모형"); shape.add("장방형"); shape.add("오각형"); shape.add("육각형"); shape.add("팔각형"); shape.add(" ");
+        shape.add("마름모형"); shape.add("장방형"); shape.add("오각형"); shape.add("육각형"); shape.add("팔각형");
 
-        color = new ArrayList<>(); color.add(" ");
+        color = new ArrayList<>();
         color.add("전체"); color.add("하양"); color.add("노랑"); color.add("주황"); color.add("분홍"); color.add("빨강");
         color.add("갈색"); color.add("연두"); color.add("초록"); color.add("청록"); color.add("파랑"); color.add("남색");
-        color.add("자주"); color.add("보라"); color.add("회색"); color.add("검정"); color.add("투명"); color.add(" ");
+        color.add("자주"); color.add("보라"); color.add("회색"); color.add("검정"); color.add("투명");
 
         context = getActivity();
         View view = inflater.inflate(R.layout.fragment_search_by_shape, container, false);
@@ -86,8 +86,8 @@ public class SearchByShapeFragment extends Fragment {
         RecyclerView recyclerView3 = (RecyclerView)view.findViewById(R.id.rv3);
         PickerLayoutManager pickerLayoutManager3 = new PickerLayoutManager(getActivity(), PickerLayoutManager.HORIZONTAL, false);
         pickerLayoutManager3.setChangeAlpha(true);
-        pickerLayoutManager3.setScaleDownBy(0.99f);
-        pickerLayoutManager3.setScaleDownDistance(0.1f);
+        pickerLayoutManager3.setScaleDownBy(0.6f);
+        pickerLayoutManager3.setScaleDownDistance(0.4f);
 
         SnapHelper snapHelper3 = new LinearSnapHelper();
         snapHelper3.attachToRecyclerView(recyclerView3);
