@@ -42,9 +42,10 @@ public class DrugDatabaseActivity extends AppCompatActivity {
 
     public void parseData(String drugName1, String drugName2) {
         try {
+            for(int i=1;i<=3;i++){
             String searchDrug = URLEncoder.encode(drugName1);
             URL url = new URL("http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=" +
-                    key + "&numOfRows=100&pageNo=1&itemName=" + searchDrug);
+                    key + "&numOfRows=100&pageNo=" + i + "&itemName=" + searchDrug);
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserCreator.newPullParser();
 
@@ -101,7 +102,7 @@ public class DrugDatabaseActivity extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals("item")) {
-                            if(mixName.contains(drugName2)){
+                            if (mixName.contains(drugName2)) {
                                 Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
                                 intent.putExtra("interaction", prohbt);
                                 intent.putExtra("drug1", drugName1);
@@ -114,6 +115,7 @@ public class DrugDatabaseActivity extends AppCompatActivity {
                         break;
                 }
                 parserEvent = parser.next();
+            }
             }
         } catch (Exception e) {
             e.printStackTrace();

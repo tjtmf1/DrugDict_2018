@@ -174,6 +174,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     public void DrugDetail(ProductInfo p){
         Intent intent = new Intent(this, DrugDetailActivity.class);
         intent.putExtra("drug", p);
+        intent.putExtra("where", "SearchDrug");
         startActivityForResult(intent, ADD_BUCKET);
     }
 

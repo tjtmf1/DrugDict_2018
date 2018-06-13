@@ -14,14 +14,14 @@ import com.squareup.picasso.Picasso;
 
 public class DrugDetailActivity extends AppCompatActivity {
     ProductInfo drug;
-
+    String where;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drug_detail);
         Intent intent = getIntent();
         drug = (ProductInfo) intent.getSerializableExtra("drug");
-
+        where = intent.getStringExtra("where");
         setupToolBar();
 
         //이름으로 drug 찾기.
@@ -43,6 +43,8 @@ public class DrugDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if(where.equals("MyTaking"))
+            return true;
         getMenuInflater().inflate(R.menu.actionbar_drug_detail, menu);
         return true;
     }
