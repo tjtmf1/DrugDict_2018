@@ -194,5 +194,11 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         setResult(PUT_IN_BUCKET, intent);
         finish();
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
+    }
 }
 
