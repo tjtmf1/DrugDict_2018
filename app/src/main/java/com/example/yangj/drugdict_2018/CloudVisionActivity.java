@@ -338,6 +338,7 @@ public class CloudVisionActivity extends AppCompatActivity {
         } else {
             message = "nothing";
         }
+        Log.v("qwe",message);
         message = pickdrugname(message);
         // 이제 이 message 를 Arraylist로 만들면됩니다 (공백으로 구분해서) 디비 처리할때.
 
@@ -360,6 +361,7 @@ public class CloudVisionActivity extends AppCompatActivity {
                 name+=str.charAt(i);
             }
         }
+
         return arrayList;
     }
     public static String pickdrugname(String original) {
@@ -379,7 +381,7 @@ public class CloudVisionActivity extends AppCompatActivity {
                 }
             }
             if (original.charAt(i) != ' ') {
-                if (original.charAt(i) >= '0' && original.charAt(i) <= '9') {
+                if (original.charAt(i) >= '0' && original.charAt(i) <= '9'||original.charAt(i)==')') {
                     num++;
                     continue;
                 } else {
@@ -387,6 +389,7 @@ public class CloudVisionActivity extends AppCompatActivity {
                 }
             }
         }
+
         String a = "";
 //        for (int i = 0; i < drugname.size(); i++) {
 //            a += drugname.get(i) + " ";
