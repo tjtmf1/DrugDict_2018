@@ -11,65 +11,94 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="색깔"/>
+            android:layout_marginTop="8dp"
+            android:text="색깔"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
         <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingLeft="160dp"
+            android:paddingRight="160dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorUnder"></View>
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="15sp"
+        android:text="모양"
+        android:textAlignment="center"/>
+
+        <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center"
         android:clipToPadding="false"
-            android:paddingLeft="160dp"
-            android:paddingRight="160dp"
-            android:background="@drawable/border"/>
+        android:paddingLeft="160dp"
+        android:paddingRight="160dp" />
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorUnder"></View>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="모양"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="분할선"
+        android:textAlignment="center"
+        android:textSize="15sp" />
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv2"
-            android:layout_gravity="center"
+        android:id="@+id/rv3"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
+        android:paddingLeft="160dp"
+        android:paddingRight="160dp" />
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorUnder"></View>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:clipToPadding="false"
-            android:paddingLeft="160dp"
-            android:paddingRight="160dp"
-            android:background="@drawable/border"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="분할선"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv3"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:clipToPadding="false"
-            android:paddingLeft="160dp"
-            android:paddingRight="160dp"
-            android:background="@drawable/border"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
+
             <Button
                 android:id="@+id/shapeSearchBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="검색"/>
-        </LinearLayout>
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimary"
+                android:textColor="#ffffff"
+                android:text="검색" />
+        </RelativeLayout>
     </LinearLayout>
+
 
 </FrameLayout>
