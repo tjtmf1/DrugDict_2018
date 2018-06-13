@@ -5,6 +5,8 @@ import android.content.Intent;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -21,107 +23,197 @@ public class GetInteractionAPI {
 
     public String SearchInteraction(String drugName1, String drugName2) {
         String interaction = "";
-        interaction = Search(drugName1, drugName2, 1);
+        interaction = search(drugName1, drugName2, 1);
         if (!interaction.equals("")) {
             return interaction;
-        } else if (totalCount > 100) {
-            int maxPage = (int) Math.ceil(totalCount / 100.0);
-            for (int i = 2; i <= maxPage; i++) {
-                interaction = Search(drugName1, drugName2, 2);
+        } else {
+//            int maxPage = (int) Math.ceil(totalCount / 100.0);
+//            for (int i = 2; i <= maxPage; i++) {
+                interaction = search(drugName1, drugName2, 2);
                 if (!interaction.equals("")) {
                     return interaction;
                 }
-            }
+//            }
         }
         return interaction;
     }
+    public String search(String drugName1, String drugName2, int page) {
+        String ans = "";
+        StringBuffer buffer = new StringBuffer();
+        String searchDrug = URLEncoder.encode(drugName1);
+//        String med1 = "스포라녹스캡슐(이트라코나졸)";
+//        String med2 = "심바스타정40밀리그램(심바스타틴)";
+//        String med1 = edit.getText().toString();
+//        String med2 = edit2.getText().toString();
+        String queryUrl = "http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=" +
+                key +
+                "&numOfRows=100&pageNo="+ page +"&itemName=" + searchDrug;
 
-    private String Search(String drugName1, String drugName2, int page){
-        if(drugName1.compareTo(drugName2) > 0){
-            String temp = drugName1;
-            drugName1 = drugName2;
-            drugName2 = temp;
-        }
         try {
-            String searchDrug = URLEncoder.encode(drugName1);
-            URL url = new URL("http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=" +
-                    key + "&numOfRows=100&pageNo=" + page +"&itemName=" + searchDrug);
-            XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = parserCreator.newPullParser();
+            URL url = new URL(queryUrl);
+            InputStream is = url.openStream(); // url 위치로 입력스트림 연결
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(is, "UTF-8"));//inputstream으로부터 xml입력받기
+            int eventType = xpp.getEventType();
 
-            parser.setInput(url.openStream(), null);
-            int parserEvent = parser.getEventType();
-            System.out.println("파싱시작합니다.");
-            while (parserEvent != XmlPullParser.END_DOCUMENT) {
-                switch (parserEvent) {
+            boolean CHECK_NAME = false, CHECK_MIXTURE = false, CHECK_PROHBT = false;
+            boolean check1 = false, check2 = false;
+            boolean CHECK_FIN = false;
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+
+                switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+                        buffer.append("파싱 시작..\n\n");
+                        break;
+
                     case XmlPullParser.START_TAG:
-                        if (parser.getName().equals("ITEM_NAME")) { //title 만나면 내용을 받을수 있게 하자
-                            //System.out.println("");
-                            inName = true; //약의 이름
+                        String tag_name = xpp.getName();
+                        if (tag_name.equals("ITEM_NAME")) {
+                            CHECK_NAME = true;
                         }
-                        if (parser.getName().equals("INGR_KOR_NAME")) {
-
-                            inIng = true; //약의 성분
+                        if (tag_name.equals("MIXTURE_ITEM_NAME")) {
+                            CHECK_MIXTURE = true;
                         }
-                        if (parser.getName().equals("MIXTURE_ITEM_NAME")) {
-
-                            inMixName = true; //혼용약 이름
-                        }
-                        if (parser.getName().equals("MIXTURE_INGR_KOR_NAME")) {
-
-                            inMixIng = true; //혼용약 성분
-                        }
-                        if (parser.getName().equals("PROHBT_CONTENT")) {
-
-                            inProhbt = true; //부작용
-                        }
-                        if(parser.getName().equals("totalCount")){
-                            isTotal = true;
+                        if (tag_name.equals("PROHBT_CONTENT")) {
+                            CHECK_PROHBT = true;
                         }
                         break;
 
-                    case XmlPullParser.TEXT://parser가 내용에 접근했을때
-
-                        if (inName) { //isName이 true일 때 태그의 내용을 저장.
-                            medName = parser.getText();
-                            inName = false;
-                        }
-                        if (inIng) {
-                            medIng = parser.getText();
-                            inIng = false;
-                        }
-                        if (inMixName) {
-                            mixName = parser.getText();
-                            inMixName = false;
-                        }
-                        if (inMixIng) {
-                            mixIng = parser.getText();
-                            inMixIng = false;
-                        }
-                        if (inProhbt) {
-                            prohbt = parser.getText();
-                            inProhbt = false;
-                        }
-                        if(isTotal){
-                            totalCount = Integer.parseInt(parser.getText());
-                            isTotal = false;
-                        }
-                        break;
-                    case XmlPullParser.END_TAG:
-                        if (parser.getName().equals("item")) {
-                            if(mixName.equals(drugName2)){
-                                return prohbt;
+                    case XmlPullParser.TEXT:
+                        if (CHECK_NAME) {
+                            String Data = xpp.getText();
+                            if (drugName1.equals(Data)) {
+                                check1 = true;
                             }
-                            inItem = false;
+                        }
+                        if (CHECK_MIXTURE) {
+                            String Data = xpp.getText();
+                            if (drugName2.equals(Data)) {
+                                check2 = true;
+                            }
+                        }
+                        if (CHECK_PROHBT) {
+                            String Data = xpp.getText();
+                            if (check1 && check2) {
+                                ans = Data;
+                                CHECK_FIN = true;
+                            }
+                        }
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag_name = xpp.getName();
+                        if (tag_name.equals("ITEM_NAME")) {
+                            CHECK_NAME = false;
+                        }
+                        if (tag_name.equals("MIXTURE_ITEM_NAME")) {
+                            CHECK_MIXTURE = false;
+                        }
+                        if (tag_name.equals("PROHBT_CONTENT")) {
+                            CHECK_PROHBT = false;
+                        }
+                        if (tag_name.equals("MIXTURE_CHANGE_DATE")) {
+                            check1 = false;
+                            check2 = false;
                         }
                         break;
                 }
-                parserEvent = parser.next();
+                eventType = xpp.next();
+                if (CHECK_FIN)// 만약 답을 찾았으면 반복문을 빠져나간다
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return ans;
     }
+//    private String Search(String drugName1, String drugName2, int page){
+////        if(drugName1.compareTo(drugName2) > 0){
+////            String temp = drugName1;
+////            drugName1 = drugName2;
+////            drugName2 = temp;
+////        }
+//        try {
+//            String searchDrug = URLEncoder.encode(drugName1);
+//            URL url = new URL("http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=" +
+//                    key + "&numOfRows=100&pageNo=" + page +"&itemName=" + searchDrug);
+//            XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+//            XmlPullParser parser = parserCreator.newPullParser();
+//
+//            parser.setInput(url.openStream(), null);
+//            int parserEvent = parser.getEventType();
+//            System.out.println("파싱시작합니다.");
+//            while (parserEvent != XmlPullParser.END_DOCUMENT) {
+//                switch (parserEvent) {
+//                    case XmlPullParser.START_TAG:
+//                        if (parser.getName().equals("ITEM_NAME")) { //title 만나면 내용을 받을수 있게 하자
+//                            //System.out.println("");
+//                            inName = true; //약의 이름
+//                        }
+//                        if (parser.getName().equals("INGR_KOR_NAME")) {
+//
+//                            inIng = true; //약의 성분
+//                        }
+//                        if (parser.getName().equals("MIXTURE_ITEM_NAME")) {
+//
+//                            inMixName = true; //혼용약 이름
+//                        }
+//                        if (parser.getName().equals("MIXTURE_INGR_KOR_NAME")) {
+//
+//                            inMixIng = true; //혼용약 성분
+//                        }
+//                        if (parser.getName().equals("PROHBT_CONTENT")) {
+//
+//                            inProhbt = true; //부작용
+//                        }
+//                        if(parser.getName().equals("totalCount")){
+//                            isTotal = true;
+//                        }
+//                        break;
+//
+//                    case XmlPullParser.TEXT://parser가 내용에 접근했을때
+//
+//                        if (inName) { //isName이 true일 때 태그의 내용을 저장.
+//                            medName = parser.getText();
+//                            inName = false;
+//                        }
+//                        if (inIng) {
+//                            medIng = parser.getText();
+//                            inIng = false;
+//                        }
+//                        if (inMixName) {
+//                            mixName = parser.getText();
+//                            inMixName = false;
+//                        }
+//                        if (inMixIng) {
+//                            mixIng = parser.getText();
+//                            inMixIng = false;
+//                        }
+//                        if (inProhbt) {
+//                            prohbt = parser.getText();
+//                            inProhbt = false;
+//                        }
+////                        if(isTotal){
+////                            totalCount = Integer.parseInt(parser.getText());
+////                            isTotal = false;
+////                        }
+//                        break;
+//                    case XmlPullParser.END_TAG:
+//                        if (parser.getName().equals("item")) {
+//                            if(mixName.equals(drugName2)){
+//                                return prohbt;
+//                            }
+//                            inItem = false;
+//                        }
+//                        break;
+//                }
+//                parserEvent = parser.next();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return "";
+//    }
 
 }

@@ -124,11 +124,11 @@ public class DrugDatabaseActivity extends AppCompatActivity {
         finish();
     }
 
-   /* public String getXmlData() {
+   public String getXmlData() {
         String ans = "";
         StringBuffer buffer = new StringBuffer();
-//        String med1 = "스포라녹스캡슐(이트라코나졸)";
-//        String med2 = "심바스타정40밀리그램(심바스타틴)";
+      String med1 = "스포라녹스캡슐(이트라코나졸)";
+     String med2 = "심바스타정40밀리그램(심바스타틴)";
         String med1 = edit.getText().toString();
         String med2 = edit2.getText().toString();
         String queryUrl = "http://apis.data.go.kr/1470000/DURPrdlstInfoService/getUsjntTabooInfoList?ServiceKey=" +
@@ -213,5 +213,5 @@ public class DrugDatabaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return ans;
-    }*/
+    }
 }
