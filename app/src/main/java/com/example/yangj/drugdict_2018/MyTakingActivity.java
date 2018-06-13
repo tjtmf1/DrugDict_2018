@@ -54,7 +54,7 @@ public class MyTakingActivity extends AppCompatActivity {
                 }
             }
         };
-        handler = new FirebaseHandler_MyTaking(MainMenuActivity.uid);
+        handler = new FirebaseHandler_MyTaking(LoginActivity.uid);
         handler.setHandler(mHandler);
         handler.getAllDrug();
 

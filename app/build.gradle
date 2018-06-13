@@ -22,6 +22,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
     }
 }
 
@@ -47,10 +48,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
     implementation 'com.github.adityagohad:HorizontalPicker:1.0.1'
-
     implementation files('libs/jxl.jar')
     implementation 'com.squareup.picasso:picasso:2.71828'
-
 }
 
 apply plugin: 'com.google.gms.google-services'

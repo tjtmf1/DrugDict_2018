@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
+    static String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +94,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            String uid = user.getUid();
+                            uid = user.getUid();
                             Log.v("uid : ", uid);
-                            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
-                            intent.putExtra("uid", uid);
+                            Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -148,8 +148,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.v("uid", user.getUid());
-                            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
-                            intent.putExtra("uid", user.getUid());
+                            uid = user.getUid();
+                            Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.

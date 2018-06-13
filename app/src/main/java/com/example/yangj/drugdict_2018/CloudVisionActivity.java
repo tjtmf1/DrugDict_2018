@@ -55,7 +55,7 @@ public class CloudVisionActivity extends AppCompatActivity {
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
 
-    private static  ArrayList<ProductInfo> drugs;
+    private static  ArrayList<String> drugs;
     private static String text = null;
     private ProgressBar progressBar;
     private static String uri;
@@ -364,7 +364,7 @@ public class CloudVisionActivity extends AppCompatActivity {
                 continue;
             } else {
                 if(!drug.equals("")){
-//                    drugs.add(new ProductInfo(drug));
+                    drugs.add(drug);
                     drug = "";
                 }
             }
