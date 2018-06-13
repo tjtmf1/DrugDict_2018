@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -89,6 +90,16 @@ public class MyTakingActivity extends AppCompatActivity {
         mDrugList.setOnScrollListener(touchListener.makeScrollListener());
 
         dialog = new LoadingDialog(this);
+
+        mDrugList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), DrugDetailActivity.class);
+                intent.putExtra("drug", mDrugs.get(position));
+                intent.putExtra("where", "MyTaking");
+                startActivity(intent);
+            }
+        });
     }
 
     public void setupToolBar(){
