@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,8 +34,10 @@ public class ExcelData {
     int RowEnd; // 엑셀의 끝 항목 번호
     Handler handler;
 
+    static final int GET_BY_NAME = 30;
     static final int SEARCH_BY_NAME = 90;
     static final int SEARCH_INFO = 40;
+    static final int NOT_FOUND = -1;
     ExcelData(){
         pinfo = new ArrayList<>();
         arrayinfo = new ArrayList<>();
@@ -315,6 +319,29 @@ public class ExcelData {
             }
         });
         return arrayinfo;
+    }
+
+    public void SearchByName(String _name){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Medinfo/" + _name);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    ProductInfo p = dataSnapshot.getValue(ProductInfo.class);
+                    Message msg = new Message();
+                    msg.obj = p;
+                    msg.what = GET_BY_NAME;
+                    handler.sendMessage(msg);
+                } else {
+                    handler.sendEmptyMessage(NOT_FOUND);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public ArrayList<ProductInfo> getArrayinfo() {

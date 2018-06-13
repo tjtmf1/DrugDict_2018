@@ -3,7 +3,11 @@ package com.example.yangj.drugdict_2018;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +22,13 @@ import java.util.ArrayList;
 public class AddPrescriptionActivity extends AppCompatActivity {
 
     private static final String TAG = "AppPrescription";
-    private ListView mDrugList;
+    private RecyclerView mDrugList;
     private ImageView mMainImage;
     private AddDrugListAdapter adapter;
     private ArrayList<String> drugs;
-    private ArrayList<String> useDrugs;
+    private ArrayList<ProductInfo> useDrugs;
+    private Handler handler;
+    int cnt = 0;
 
     private String uri;
 
@@ -37,14 +43,36 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         drugs = (ArrayList) intent.getStringArrayListExtra("detectDrugs");
         uri = intent.getStringExtra("imageUri");
 
-        mDrugList = findViewById(R.id.lvAddDrugs);
+        mDrugList = findViewById(R.id.rvAddDrugs);
         mMainImage = findViewById(R.id.ivPrescription);
 
         Log.d(TAG, "uri : " + uri);
         mMainImage.setImageURI(Uri.parse(uri));
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mDrugList.setLayoutManager(layoutManager);
         useDrugs = new ArrayList<>();
-        adapter = new AddDrugListAdapter(this, R.layout.add_drug_layout, drugs);
+        adapter = new AddDrugListAdapter(drugs);
         mDrugList.setAdapter(adapter);
+
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what == ExcelData.GET_BY_NAME){
+                    ProductInfo p = (ProductInfo) msg.obj;
+                    cnt++;
+                }else if(msg.what == ExcelData.NOT_FOUND){
+                    cnt++;
+                }
+                if(cnt == drugs.size()){
+                    Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
+                    intent.putExtra("useDrugs", useDrugs);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        };
     }
 
     public void setupToolBar(){
@@ -66,18 +94,16 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     }
 
     public void onSave(MenuItem item) {
-        ArrayList<EditText> editTexts = adapter.getmEditTexts();
-        ArrayList<CheckBox> checkBoxes = adapter.getmCheckBoxs();
+        ArrayList<Boolean> isChecked = adapter.getCheckced();
+        ArrayList<String> name = adapter.getName();
 
         for(int i=0; i<drugs.size(); i++){
-            if(checkBoxes.get(i).isChecked()){
-                useDrugs.add(editTexts.get(i).getText().toString());
+            if(isChecked.get(i)){
+                ExcelData excelData = new ExcelData();
+                excelData.setHandler(handler);
+                excelData.SearchByName(name.get(i));
             }
         }
 
-        Intent intent = new Intent();
-        intent.putExtra("useDrugs", useDrugs);
-        setResult(RESULT_OK, intent);
-        finish();
     }
 }
