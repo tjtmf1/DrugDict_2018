@@ -34,6 +34,8 @@ public class MyTakingActivity extends AppCompatActivity {
     private ListView mDrugList;
     private TakingDrugListAdapter adapter;
 
+    LoadingDialog dialog;
+
     @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class MyTakingActivity extends AppCompatActivity {
         mDrugList.setOnTouchListener(touchListener);
         mDrugList.setOnScrollListener(touchListener.makeScrollListener());
 
-
+        dialog = new LoadingDialog(this);
     }
 
     public void setupToolBar(){
@@ -163,6 +165,7 @@ public class MyTakingActivity extends AppCompatActivity {
                     break;
             }
         } else if(resultCode == SearchDrugActivity.PUT_IN_BUCKET){
+            dialog.show();
             ArrayList<ProductInfo> new_drug = (ArrayList<ProductInfo>) data.getSerializableExtra("addDrug");
 
             for(int i=0;i<mDrugs.size();i++){
@@ -181,6 +184,7 @@ public class MyTakingActivity extends AppCompatActivity {
             }
             adapter = new TakingDrugListAdapter(getApplicationContext(), R.layout.drug_list_row, mDrugs);
             mDrugList.setAdapter(adapter);
+            dialog.dismiss();
 
         } else if(resultCode == DrugDatabaseActivity.INTERACTION_SEARCH){
             String interaction = data.getStringExtra("interaction");
