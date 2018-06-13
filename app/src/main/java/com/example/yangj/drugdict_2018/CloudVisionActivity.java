@@ -2,6 +2,7 @@ package com.example.yangj.drugdict_2018;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,6 +14,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,13 +63,23 @@ public class CloudVisionActivity extends AppCompatActivity {
     private static String text = null;
     private ProgressBar progressBar;
     private static String uri;
+    private Context context;
+    private ImageView imageVIew;
+    private TextView textView;
 
     public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cloud_vision);
+//        setContentView(R.layout.activity_cloud_vision);
+        setContentView(R.layout.loading_dialog);
+        imageVIew = (ImageView) findViewById(R.id.loading_image);
+        textView = (TextView) findViewById(R.id.loading_text);
+        textView.setText("처방전 읽는중");
+
+        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.loading);
+        imageVIew.setAnimation(anim);
 
         activity = this;
 
@@ -80,10 +94,6 @@ public class CloudVisionActivity extends AppCompatActivity {
                 startGalleryChooser();
                 break;
         }
-
-        progressBar = (ProgressBar) findViewById(R.id.spinKit);
-        Wave wave = new Wave();
-        progressBar.setIndeterminateDrawable(wave);
     }
 
     public void startGalleryChooser() {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
     Handler handler;
     ExcelData excelData;
     LoadingDialog dialog;
+
     static final int ADD_BUCKET = 100;
     static final int PUT_IN_BUCKET = 50;
     @Override
@@ -129,6 +131,7 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         };
         excelData.setHandler(handler);
         dialog = new LoadingDialog(this);
+        dialog.setTextViewText("약 검색 중");
     }
 
 
