@@ -45,7 +45,6 @@
         <activity android:name=".DrugDatabaseActivity" />
         <activity android:name=".PrecautionActivity" />
         <activity android:name=".DrugDetailActivity" />
-        <activity android:name=".MainMenuActivity"></activity>
     </application>
 
 </manifest>

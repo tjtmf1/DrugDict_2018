@@ -90,23 +90,28 @@ public class ExcelData {
 
     } // makeDB
 
-    public ArrayList<ProductInfo> searchByInfo(String img, String shape, String fcol, String bcol,
-                                               String fline, String bline){ // 모든 정보 입력시 일치하는 객체 반환
+    public ArrayList<ProductInfo> searchByInfo(String color, String shape, String line){ // 모든 정보 입력시 일치하는 객체 반환
         table = FirebaseDatabase.getInstance().getReference("MedInfo");
         table.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 arrayinfo.clear();
-
+                String _line;
+                if(line.equals("(-)형")){
+                    _line = "-";
+                }else if(line.equals("(+)형")){
+                    _line = "+";
+                }else if(line.equals("없음")){
+                    _line = "";
+                }
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
                     ProductInfo info = snapshot.getValue(ProductInfo.class);
-                    if ((info.getImg().equals(img)||info.getImg().equals(null)) &&
-                            (info.getShape().equals(shape)||info.getShape().equals(null)) &&
-                            (info.getFrontCol().equals(fcol)||info.getFrontCol().equals(null)) &&
-                            (info.getBackCol().equals(bcol)||info.getBackCol().equals(null)) &&
-                            (info.getFrontLine().equals(fline)||info.getFrontLine().equals(null)) &&
-                            (info.getBackLine().equals(bline)||info.getBackLine().equals(null))){
-                        arrayinfo.add(info);
+                    if(info.getFrontCol().equals(color) || info.getBackCol().equals(color) || color.equals("전체")){
+                        if(info.getShape().equals(shape) || shape.equals("전체")){
+                            if(info.getFrontLine().equals(line)){
+                                arrayinfo.add(snapshot.getValue(ProductInfo.class));
+                            }
+                        }
                     }
                 }
                 handler.sendEmptyMessage(SEARCH_INFO);

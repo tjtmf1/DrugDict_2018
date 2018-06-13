@@ -35,9 +35,9 @@ public class DrugDetailActivity extends AppCompatActivity {
 
         Picasso.get().load(drug.getImg()).into(drugImage);
         drugName.setText(drug.getName());
-        //drugCompany.setText(drug.getmCompany);
-        //drugShape.setText(drug.getShape());
-        //drugColor.setText(drug.getmColor);
+        drugCompany.setText(drug.getCompName());
+        drugShape.setText(drug.getShape());
+        drugColor.setText(drug.getFrontCol());
 
     }
 

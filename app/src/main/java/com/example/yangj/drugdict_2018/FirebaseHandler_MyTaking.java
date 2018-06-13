@@ -37,7 +37,17 @@ public class FirebaseHandler_MyTaking {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()){
-//                    taking.add(new ProductInfo(data.child("mName").getValue().toString()));
+                    /*String num = data.child("num").getValue().toString();
+                    String name = data.child("name").getValue().toString();
+                    String img = data.child("img").getValue().toString();
+                    String shape = data.child("shape").getValue().toString();
+                    String frontCol = data.child("frontCol").getValue().toString();
+                    String backCol = data.child("backCol").getValue().toString();
+                    String frontLine = data.child("frontLine").getValue().toString();
+                    String backLine = data.child("backLine").getValue().toString();
+                    String compName = data.child("compName").getValue().toString();
+                    taking.add(new ProductInfo(num, name, img, shape, frontCol, backCol, frontLine, backLine, compName));*/
+                    taking.add(data.getValue(ProductInfo.class));
                 }
                 handler.sendEmptyMessage(GET_COMPLETE);
             }

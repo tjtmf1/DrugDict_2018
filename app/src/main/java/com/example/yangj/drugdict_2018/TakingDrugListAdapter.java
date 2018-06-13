@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class TakingDrugListAdapter extends ArrayAdapter {
@@ -39,7 +41,7 @@ public class TakingDrugListAdapter extends ArrayAdapter {
             ImageView ivDrugImage = (ImageView) v.findViewById(R.id.ivDrugImage);
             TextView tvDrugName = (TextView) v.findViewById(R.id.tvDrugName);
             tvDrugName.setTextColor(Color.BLACK);
-            //ivDrugImage.setImageResource(); // 약 이미지 추가
+            Picasso.get().load(drug.getImg()).into(ivDrugImage); // 약 이미지 추가
             tvDrugName.setText(drug.getName());
         }
 
