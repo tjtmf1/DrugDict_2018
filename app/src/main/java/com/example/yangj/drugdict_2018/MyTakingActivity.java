@@ -120,10 +120,11 @@ public class MyTakingActivity extends AppCompatActivity {
                 case CLOUD_VISION:
                     Log.d("MyTakingActivity", "finish cloud vision");
 
-                    mDrugs = (ArrayList) data.getSerializableExtra("detectDrugs");
+                    ArrayList<ProductInfo> list;
+                    list = (ArrayList) data.getSerializableExtra("detectDrugs");
 
                     Intent intent = new Intent(getApplicationContext(), AddPrescriptionActivity.class);
-                    intent.putExtra("detectDrugs", mDrugs);
+                    intent.putExtra("detectDrugs", list);
                     intent.putExtra("imageUri", data.getStringExtra("imageUri"));
                     startActivityForResult(intent, ADD_PRESCRIPTION);
 
@@ -134,7 +135,7 @@ public class MyTakingActivity extends AppCompatActivity {
                     // firebase에 올려주는 작업
                     for(int i=0;i<new_drug.size();i++) {
                         handler.addDrug(new_drug.get(i));
-                        //mDrugs.add(new_drug.get(i));
+                        mDrugs.add(new_drug.get(i));
                     }
                     adapter = new TakingDrugListAdapter(getApplicationContext(), R.layout.drug_list_row, mDrugs);
                     mDrugList.setAdapter(adapter);

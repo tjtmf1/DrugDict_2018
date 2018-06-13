@@ -4,6 +4,8 @@ package com.example.yangj.drugdict_2018;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.wefika.horizontalpicker.HorizontalPicker;
 
@@ -29,9 +32,15 @@ public class SearchByShapeFragment extends Fragment {
     List<String> color;
     List<String> shape;
     List<String> divisionLine;
+    Handler handler;
+    ExcelData excelData;
     //String[] color = {"전체" ,"하양", "노랑", "주황", "분홍","빨강","갈색","연두","초록","청록","파랑","남색","자주","보라","회색","검정","투명"};
     //String[] shape = {"전체" ,"원형", "타원형","반원형","삼각형","사각형","마름모형","장방형","오각형","육각형","팔각형","기타"};
     //String[] divisionLine = {"없음","(-)형", "(+)형", "기타"};
+
+    private String colorString = "";
+    private String shapeString = "";
+    private String divisionString = "";
     public SearchByShapeFragment() {
         // Required empty public constructor
     }
@@ -60,8 +69,15 @@ public class SearchByShapeFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.rv);
         PickerLayoutManager pickerLayoutManager = new PickerLayoutManager(getActivity(), PickerLayoutManager.HORIZONTAL, false);
         pickerLayoutManager.setChangeAlpha(true);
-        pickerLayoutManager.setScaleDownBy(0.99f);
+        pickerLayoutManager.setScaleDownBy(0.6f);
         pickerLayoutManager.setScaleDownDistance(0.8f);
+        pickerLayoutManager.setOnScrollStopListener(new PickerLayoutManager.onScrollStopListener() {
+            @Override
+            public void selectedView(View view) {
+                TextView tv = (TextView)view.findViewById(R.id.picker_text);
+                colorString = tv.getText().toString();
+            }
+        });
 
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
@@ -73,8 +89,15 @@ public class SearchByShapeFragment extends Fragment {
         RecyclerView recyclerView2 = (RecyclerView)view.findViewById(R.id.rv2);
         PickerLayoutManager pickerLayoutManager2 = new PickerLayoutManager(getActivity(), PickerLayoutManager.HORIZONTAL, false);
         pickerLayoutManager2.setChangeAlpha(true);
-        pickerLayoutManager2.setScaleDownBy(0.99f);
+        pickerLayoutManager2.setScaleDownBy(0.6f);
         pickerLayoutManager2.setScaleDownDistance(0.8f);
+        pickerLayoutManager2.setOnScrollStopListener(new PickerLayoutManager.onScrollStopListener() {
+            @Override
+            public void selectedView(View view) {
+                TextView tv = (TextView)view.findViewById(R.id.picker_text);
+                shapeString = tv.getText().toString();
+            }
+        });
 
         SnapHelper snapHelper2 = new LinearSnapHelper();
         snapHelper2.attachToRecyclerView(recyclerView2);
@@ -86,8 +109,21 @@ public class SearchByShapeFragment extends Fragment {
         RecyclerView recyclerView3 = (RecyclerView)view.findViewById(R.id.rv3);
         PickerLayoutManager pickerLayoutManager3 = new PickerLayoutManager(getActivity(), PickerLayoutManager.HORIZONTAL, false);
         pickerLayoutManager3.setChangeAlpha(true);
+
         pickerLayoutManager3.setScaleDownBy(0.6f);
         pickerLayoutManager3.setScaleDownDistance(0.4f);
+        pickerLayoutManager3.setOnScrollStopListener(new PickerLayoutManager.onScrollStopListener() {
+            @Override
+            public void selectedView(View view) {
+                TextView tv = (TextView)view.findViewById(R.id.picker_text);
+                if(tv.getText().toString().equals("없음"))
+                    divisionString = "";
+                else if(tv.getText().toString().equals("(-)형"))
+                    divisionString = "-";
+                else if(tv.getText().toString().equals("(+)형"))
+                    divisionString ="+";
+            }
+        });
 
         SnapHelper snapHelper3 = new LinearSnapHelper();
         snapHelper3.attachToRecyclerView(recyclerView3);
@@ -96,17 +132,27 @@ public class SearchByShapeFragment extends Fragment {
         PickerAdapter adapter3 = new PickerAdapter(getContext(), divisionLine, recyclerView3);
         recyclerView3.setAdapter(adapter3);
 
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what == ExcelData.SEARCH_INFO){
+                    ArrayList<ProductInfo> list = excelData.getArrayinfo();
+                    if(getActivity() instanceof callListListener){
+                        ((callListListener) getActivity()).changeListView(list);
+                    }
+                }
+            }
+        };
+
         Button btn = (Button)view.findViewById(R.id.shapeSearchBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //검색후 프래그먼트 바꿔줌
-
-                ArrayList<ProductInfo> a = new ArrayList<>();
-                a.add(new ProductInfo("n", "s", "s", "1", "1", "1", "1","1","1"));
-                if(getActivity() instanceof callListListener){
-                    ((callListListener) getActivity()).changeListView(a);
-                }
+                excelData = new ExcelData();
+                excelData.setHandler(handler);
+                excelData.searchByInfo(colorString, shapeString, divisionString);
             }
         });
         return view;

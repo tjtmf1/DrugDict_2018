@@ -18,13 +18,13 @@
         android:layout_height="1dp"
         android:background="@color/colorUnderLine"/>
 
-    <ListView
-        android:id="@+id/lvAddDrugs"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvAddDrugs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
     <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
