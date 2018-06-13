@@ -322,7 +322,7 @@ public class ExcelData {
     }
 
     public void SearchByName(String _name){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Medinfo/" + _name);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("MedInfo/" + _name);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

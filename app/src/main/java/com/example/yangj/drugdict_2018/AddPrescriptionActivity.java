@@ -29,7 +29,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     private ArrayList<ProductInfo> useDrugs;
     private Handler handler;
     int cnt = 0;
-
+    int cntChecked = 0;
     private String uri;
 
     @Override
@@ -61,11 +61,12 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 super.handleMessage(msg);
                 if(msg.what == ExcelData.GET_BY_NAME){
                     ProductInfo p = (ProductInfo) msg.obj;
+                    useDrugs.add(p);
                     cnt++;
                 }else if(msg.what == ExcelData.NOT_FOUND){
                     cnt++;
                 }
-                if(cnt == drugs.size()){
+                if(cnt == cntChecked){
                     Intent intent = new Intent(getApplicationContext(), MyTakingActivity.class);
                     intent.putExtra("useDrugs", useDrugs);
                     setResult(RESULT_OK, intent);
@@ -102,6 +103,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 ExcelData excelData = new ExcelData();
                 excelData.setHandler(handler);
                 excelData.SearchByName(name.get(i));
+                cntChecked++;
             }
         }
 
