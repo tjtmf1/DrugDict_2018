@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class AddDrugListAdapter extends ArrayAdapter {
     Context context;
-    ArrayList<ProductInfo> mDrugs;
+    ArrayList<String> mDrugs;
     ArrayList<EditText> mEditTexts;
     ArrayList<CheckBox> mCheckBoxs;
 
@@ -40,11 +40,11 @@ public class AddDrugListAdapter extends ArrayAdapter {
                     (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = layoutInflater.inflate(R.layout.add_drug_layout, null);
 
-            ProductInfo drug = mDrugs.get(position);
+            String drug = mDrugs.get(position);
             EditText etDetectDrug = (EditText) v.findViewById(R.id.etDetectDrug);
             CheckBox cbPrescription = (CheckBox) v.findViewById(R.id.cbPrescription);
 
-            etDetectDrug.setText(drug.getName());
+            etDetectDrug.setText(drug);
             cbPrescription.setChecked(true);
 
             mEditTexts.add(etDetectDrug);
@@ -54,13 +54,13 @@ public class AddDrugListAdapter extends ArrayAdapter {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     mCheckBoxs.get(position).setChecked(isChecked);
-
-                    String str = "";
-                    for(int i=0; i<mDrugs.size(); i++){
-                        if(mCheckBoxs.get(i).isChecked())
-                            str += mDrugs.get(i).getName();
-                    }
-                    Log.d("DrugListAdapter", str);
+//
+//                    String str = "";
+//                    for(int i=0; i<mDrugs.size(); i++){
+//                        if(mCheckBoxs.get(i).isChecked())
+//                            str += mDrugs.get(i);
+//                    }
+//                    Log.d("DrugListAdapter", str);
                 }
             });
         }

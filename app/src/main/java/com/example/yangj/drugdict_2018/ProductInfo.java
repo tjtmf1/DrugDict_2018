@@ -16,8 +16,6 @@ public class ProductInfo implements Serializable {
     public ProductInfo() {
     }
 
-
-
     public ProductInfo(String num, String name, String img, String shape, String frontcol,
                        String backcol, String frontline, String backline, String compName) {
         this.num = num;

@@ -21,8 +21,8 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     private ListView mDrugList;
     private ImageView mMainImage;
     private AddDrugListAdapter adapter;
-    private ArrayList<ProductInfo> drugs;
-    private ArrayList<ProductInfo> useDrugs;
+    private ArrayList<String> drugs;
+    private ArrayList<String> useDrugs;
 
     private String uri;
 
@@ -34,7 +34,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         setupToolBar();
 
         Intent intent = getIntent();
-        drugs = (ArrayList) intent.getSerializableExtra("detectDrugs");
+        drugs = (ArrayList) intent.getStringArrayListExtra("detectDrugs");
         uri = intent.getStringExtra("imageUri");
 
         mDrugList = findViewById(R.id.lvAddDrugs);
@@ -71,7 +71,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
         for(int i=0; i<drugs.size(); i++){
             if(checkBoxes.get(i).isChecked()){
-//                useDrugs.add(new ProductInfo(editTexts.get(i).getText().toString()));
+                useDrugs.add(editTexts.get(i).getText().toString());
             }
         }
 
