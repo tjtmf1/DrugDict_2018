@@ -47,14 +47,16 @@ public class DrugDetailActivity extends AppCompatActivity {
         return true;
     }
 
+    public void setupToolBar(){
+        getSupportActionBar().setTitle("약으로 검색");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return false;
-    }
-
-    public void setupToolBar(){
-        getSupportActionBar().setTitle("약 추가");
     }
 
     public void onSaveBasket(MenuItem item) {

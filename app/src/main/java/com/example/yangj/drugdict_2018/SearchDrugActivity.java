@@ -42,6 +42,9 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
 
     @SuppressLint("HandlerLeak")
     public void init() {
+
+        setupToolBar();
+
         //////////////////////////탭바 설정 시작
         tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
@@ -134,6 +137,11 @@ public class SearchDrugActivity extends AppCompatActivity implements SearchBySha
         dialog.setTextViewText("약 검색 중");
     }
 
+    public void setupToolBar(){
+        getSupportActionBar().setTitle("약으로 검색");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);
+    }
 
     public void SearchByName(View view) {
         String search = searchEdit.getText().toString();

@@ -74,6 +74,9 @@ public class CloudVisionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_cloud_vision);
         setContentView(R.layout.loading_dialog);
+
+        setupToolBar();
+
         imageVIew = (ImageView) findViewById(R.id.loading_image);
         textView = (TextView) findViewById(R.id.loading_text);
         textView.setText("처방전 읽는중");
@@ -407,5 +410,9 @@ public class CloudVisionActivity extends AppCompatActivity {
         activity.finish();
 
         return a;
+    }
+
+    public void setupToolBar(){
+        getSupportActionBar().setTitle("처방전 읽기");
     }
 }

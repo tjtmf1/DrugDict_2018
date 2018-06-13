@@ -30,7 +30,6 @@ public class MyTakingActivity extends AppCompatActivity {
     FirebaseHandler_MyTaking handler;
 
     ArrayList<ProductInfo> mDrugs;
-    GetInteractionAPI api;
 
     private ListView mDrugList;
     private TakingDrugListAdapter adapter;
@@ -41,10 +40,11 @@ public class MyTakingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_taking);
 
+        setupToolBar();
+
         drugFAB = (FloatingActionButton) findViewById(R.id.drugFAB);
         prescriptionFAB = (FloatingActionButton) findViewById(R.id.prescriptionFAB);
         mDrugList = (ListView) findViewById(R.id.lvTakingDrugList);
-        api = new GetInteractionAPI(getApplicationContext());
         mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -61,7 +61,6 @@ public class MyTakingActivity extends AppCompatActivity {
                 }
             }
         };
-        api.setHandler(mHandler);
         handler = new FirebaseHandler_MyTaking(LoginActivity.uid);
         handler.setHandler(mHandler);
         handler.getAllDrug();
@@ -88,6 +87,10 @@ public class MyTakingActivity extends AppCompatActivity {
         mDrugList.setOnScrollListener(touchListener.makeScrollListener());
 
 
+    }
+
+    public void setupToolBar(){
+        getSupportActionBar().setTitle("백약사전");
     }
 
     public void onDrugFAB(View view) {
