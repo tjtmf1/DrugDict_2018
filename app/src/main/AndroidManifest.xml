@@ -27,7 +27,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MyTakingActivity" />
-        <activity android:name=".AddDrugActivity" />
         <activity android:name=".AddPrescriptionActivity" />
         <activity android:name=".SearchDrugActivity" />
         <activity android:name=".CloudVisionActivity" />
