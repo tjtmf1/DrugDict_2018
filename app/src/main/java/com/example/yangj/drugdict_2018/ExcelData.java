@@ -94,7 +94,7 @@ public class ExcelData {
 
     } // makeDB
 
-    public ArrayList<ProductInfo> searchByInfo(String color, String shape, String line){ // 모든 정보 입력시 일치하는 객체 반환
+    public void searchByInfo(String color, String shape, String line){ // 모든 정보 입력시 일치하는 객체 반환
         table = FirebaseDatabase.getInstance().getReference("MedInfo");
         table.addValueEventListener(new ValueEventListener() {
             @Override
@@ -126,7 +126,6 @@ public class ExcelData {
 
             }
         });
-        return arrayinfo;
     }
 
     public ArrayList<ProductInfo> searchByImg(String img){ // 이미지 입력시 일치하는 ProductInfo 객체 반환
@@ -153,7 +152,7 @@ public class ExcelData {
         return arrayinfo;
     }
 
-    public ArrayList<ProductInfo> showInfoByName(String name){ // 약 이름으로 정보 찾기
+    public void showInfoByName(String name){ // 약 이름으로 정보 찾기
         arrayinfo.clear();
         table = FirebaseDatabase.getInstance().getReference("MedInfo");
         table.addValueEventListener(new ValueEventListener() {
@@ -175,7 +174,6 @@ public class ExcelData {
 //                Toast.makeText(ExcelData.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
-        return arrayinfo;
     }
 
     public ArrayList<ProductInfo> searchByShape(String shape){// 모양 입력시 일치하는 ProductInfo 객체 반환

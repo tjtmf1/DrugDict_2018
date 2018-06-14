@@ -17,7 +17,6 @@ import java.util.Iterator;
 
 public class FirebaseHandler_MyTaking {
     DatabaseReference db;
-    String uid;
     Handler handler;
 
     static final int GET_COMPLETE = 100;
